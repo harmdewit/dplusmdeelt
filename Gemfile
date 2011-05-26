@@ -3,31 +3,33 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.3'
 gem 'haml'
 gem 'haml-rails'
-gem 'mysql2', '<= 0.3'
 gem 'hashie'
 gem 'twitter'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'devise'
 gem 'omniauth'
-gem 'rake', '= 0.8.7'
+gem 'rake', '~> 0.8.7'
 
 # image analysis library
 gem 'imagesize'
 
-gem 'capistrano'
 
-gem 'passenger'
+
 
 # cron job gem
 gem 'whenever', :require => false
 
 group :development do
+	gem 'capistrano'
 	gem "webrat", ">= 0.7.2"
 	gem 'sqlite3-ruby', :require => 'sqlite3'
 	gem "nifty-generators"
 	gem "compass", ">= 0.11.1"
 end
 
+group :production do
+	gem 'mysql2', '<= 0.3'
+end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20110502071210) do
   create_table "pages", :force => true do |t|
     t.string   "active"
     t.integer  "max_articles"
-    t.string   "type"
+    t.string   "page_type"
     t.string   "newest_post_date"
     t.string   "oldest_post_date"
     t.datetime "created_at"
