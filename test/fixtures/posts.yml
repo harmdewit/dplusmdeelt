@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  date_created: MyString
+  service: MyString
+  id_of_service: MyString
+  link_to_post: MyString
+
+two:
+  type: MyString
+  date_created: MyString
+  service: MyString
+  id_of_service: MyString
+  link_to_post: MyString

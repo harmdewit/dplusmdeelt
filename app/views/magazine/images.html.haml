@@ -1,0 +1,35 @@
+.container_12
+	/ %h2 Thumbnail rollover effects and slideshow crossfades
+	/ Start Advanced Gallery Html Containers
+	#gallery.content
+		/ #controls.controls
+		.slideshow-container
+			#loading.loader
+			#slideshow.slideshow
+		#caption.caption-container
+.clear
+#slider_container.clearfix
+	- j = 0
+	- @pages.each do |page|
+		.container_12
+			#page
+				#container
+					.thumbs_container
+						%ul.thumbs.noscript
+
+							- for i in 1..20 do
+								%li
+									%a.thumb{:href => @posts[j].image.data, :name => ''}
+										%img{:alt => "Title #0", :src => @posts[j].image.thumbnail}/
+									.caption
+										.download
+											%a{:href => @posts[j].image.data} Download Original
+										.image-title= @posts[j].service
+										.image-desc Description
+								- j += 1
+								- if j == @posts.length
+									- j = 0
+
+					.clear
+				#footer © 2009 Trent Foley
+

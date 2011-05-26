@@ -1,0 +1,32 @@
+- @header = 'All Linked Accounts'
+- @h2 = 'Linked Accounts'
+- @h2_image = 'admin/icons/user_32.png'
+
+%table
+	%tr
+		%th Provider
+		%th Name
+		%th Nickname
+		%th Email
+		%th Description
+		%th
+		%th
+		%th
+
+	- @linked_accounts.each do |la|
+		%tr
+			
+			%td= la.provider
+			%td= la.name
+			%td= la.nickname
+			%td= la.email
+			%td= la.description
+
+			%td= link_to 'Show', admin_linked_account_path(la)
+			%td= link_to 'Edit', edit_admin_linked_account_path(la)
+			%td= link_to 'Destroy', admin_linked_account_path(la), :confirm => 'Are you sure?', :class => :delete, :method => :delete
+
+%br
+
+= link_to 'New Linked account', new_admin_linked_account_path
+

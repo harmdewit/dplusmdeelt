@@ -1,0 +1,5 @@
+%h1= @article.title
+!= @article.original_body
+%iframe{:allowTransparency => "true", :frameborder => "0", :scrolling => "no", :src => "http://www.facebook.com/plugins/like.php?href=#{@article.post.link_to_post}&send=true&layout=standard&width=450&show_faces=true&action=like&colorscheme=light&font&height=80", :style => "border:none; overflow:hidden; width:450px; height:80px;"}
+%a.twitter-share-button{"data-count" => "horizontal", "data-text" => @article.title, "data-url" => "#{@article.post.link_to_post}", "data-via" => "hdwtest1", :href => "http://twitter.com/share"} Tweet
+%script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}

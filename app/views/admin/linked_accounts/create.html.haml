@@ -1,0 +1,26 @@
+- @header = 'Linking Facebook Page'
+- @h2 = 'Linked Accounts'
+- @h2_image = 'admin/icons/user_32.png'
+
+%b Choose the facebook page you want to authenticate:
+%table
+	%tr
+		%th Name
+		%th Category
+		%th
+
+		- @facebook_pages.each do |fp|
+			%tr
+				= form_for create_facebook_page_admin_linked_account_path([@linked_account, fp]) do |fp|
+					-if fp.errors.any?
+						#error_explanation
+							%h2= "#{pluralize(fp.errors.count, "error")} prohibited this admin_linked_account from being saved:"
+							%ul
+								- fp.errors.full_messages.each do |msg|
+									%li= msg
+
+					%td= fp.name
+					%td= fp.category
+					%td= fp.submit 'Save'
+
+= debug @response

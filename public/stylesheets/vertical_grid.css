@@ -1,0 +1,163 @@
+/*
+
+	Vertical grid, based on the 960 Grid System:
+	
+	960 Grid System ~ Core CSS.
+	Learn more ~ http://960.gs/
+
+	Licensed under GPL and MIT.
+*/
+
+/* `Containers
+----------------------------------------------------------------------------------------------------*/
+
+
+
+/* `Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+.height_1,
+.height_2,
+.height_3,
+.height_4 {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	float: left;
+	margin: 10px 0px;
+}
+
+.height_push_1, .height_pull_1,
+.height_push_2, .height_pull_2,
+.height_push_3, .height_pull_3,
+.height_push_4, .height_pull_4{
+	position: relative;
+}
+
+/* `Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+	margin-top: 0;
+}
+
+.omega {
+	margin-bottom: 0;
+}
+
+/* `Vertical Grid >> 4 Rows
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .height_1 {
+	height: 180px;
+}
+
+.container_12 .height_2 {
+	height: 380px;
+}
+
+.container_12 .height_3 {
+	height: 580px;
+}
+
+.container_12 .height_4 {
+	height: 780px;
+}
+
+/* `Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .height_prefix_1 {
+	padding-top: 200px;
+}
+
+.container_12 .height_prefix_2 {
+	padding-top: 400px;
+}
+
+.container_12 .height_prefix_3 {
+	padding-top: 600px;
+}
+
+
+/* `Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .height_suffix_1 {
+	padding-bottom: 200px;
+}
+
+.container_12 .height_suffix_2 {
+	padding-bottom: 400px;
+}
+
+.container_12 .height_suffix_3 {
+	padding-bottom: 600px;
+}
+
+
+/* `Push Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .height_push_1 {
+	top: 200px;
+}
+
+.container_12 .height_push_2 {
+	top: 400px;
+}
+
+.container_12 .height_push_3 {
+	top: 600px;
+}
+
+
+/* `Pull Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .height_pull_1 {
+	bottom: 200px;
+}
+
+.container_12 .height_pull_2 {
+	bottom: 400px;
+}
+
+.container_12 .height_pull_3 {
+	bottom: 600px;
+}
+
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2009/12/06/new-clearfix-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/*
+	The following zoom:1 rule is specifically for IE6 + IE7.
+	Move to separate stylesheet if invalid CSS is a problem.
+*/
+* html .clearfix,
+*:first-child+html .clearfix {
+	zoom: 1;
+}

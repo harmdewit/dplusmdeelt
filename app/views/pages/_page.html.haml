@@ -1,0 +1,46 @@
+.page.container_12
+	- i = 0
+	= render page.rows
+	- case page.page_type
+	- when 'footer'
+		%div{:class => "height_1"}
+			- for status in 1..3 do
+				.grid_4.alpha
+					.status
+						%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}	
+						%p= @statuses[i].status.text
+						.clear
+						.meta_data
+							= "Gemaakt op #{@statuses[i].date_created}"# .day} #{@posts[i].date_created.month} #{@posts[i].date_created.year} #{@posts[i].date_created.hour}:#{@posts[i].date_created.min} met "
+							- case @statuses[i].service
+							- when 'facebook'
+								= image_tag('social_media_logos/facebook_31.png')
+							-	when 'twitter'
+								= image_tag('social_media_logos/twitter_32.png')
+							- when 'tumblr'
+								= image_tag('social_media_logos/tumblr_32.png')
+
+				- i += 1
+								
+		.clear
+	- when 'sidebar'
+		.sidebar
+			.height_3.grid_4
+				- for status in 1..8 do
+					.status
+						%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}	
+						%p= @statuses[i].status.text
+						.clear
+						.meta_data
+							= "Gemaakt op #{@statuses[i].date_created}"# .day} #{@posts[i].date_created.month} #{@posts[i].date_created.year} #{@posts[i].date_created.hour}:#{@posts[i].date_created.min} met "
+							- case @statuses[i].service
+							- when 'facebook'
+								= image_tag('social_media_logos/facebook_31.png')
+							-	when 'twitter'
+								= image_tag('social_media_logos/twitter_32.png')
+							- when 'tumblr'
+								= image_tag('social_media_logos/tumblr_32.png')
+					%br
+				.clear
+				- i += 1
+		.clear

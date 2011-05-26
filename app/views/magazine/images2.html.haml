@@ -1,0 +1,63 @@
+.navigation
+	#clickme_javascript
+		%a{:href => "#"} Click javascript slide
+	#clickme_css
+		%a{:href => "#"} Click css slide
+	#counter 0
+	#total 0
+	#slider.slider_container
+	
+.slider_container
+	- i = 0
+	- j = 0
+	- @pages.each do |page|
+		.container_12
+			%h1 Images
+
+			- page[:rows].each do |row|
+				
+				%div{:class => "img_height_#{row[:row_height]} image_frame"}
+					- row[:columns].each do |column|
+						-# if column[:column_width] * 80 >= row[:row_height] * 250
+						- post = @landscapes[i]
+						- i += 1
+						- if i == @landscapes.length
+							- i = 0
+						-# else
+							- post = @portraits[j]
+							- j += 1
+							- if j == @portraits.length
+								- j = 0
+						- img_width = post.image.width
+						- img_height = post.image.height
+						- width = column[:column_width]
+						- height = row[:row_height]
+						- ratio = Rational(width * 80, img_width)
+						- new_img_height = (Rational(width * 80, img_width) * img_height).to_i
+						- new_img_width = (Rational(height * 250, img_height) * img_width).to_i
+						- if ((width * 80) * img_height) >= ((height * 250) * img_width)
+							- orientation = 'landscape'
+						- else
+							- orientation = 'portrait'
+						%div{:class => "img_#{column[:column_width]} img_#{orientation}"}
+							/%p= "#{orientation}, column_width: #{width * 80}, image_width: #{img_width}, row_height: #{height * 250}, image_height: #{img_height},  widthratio: #{(width * 80 / img_width)}, heightratio: #{(height * 250 / img_height )} new_img_width #{new_img_width}"
+							- if orientation == 'landscape'
+								= image_tag(post.image.data, :style => "margin-top: #{(height * 250 - new_img_height) / 2}px")
+							- else 
+							= image_tag(post.image.data, :style => "margin-left: #{(width * 80 - new_img_width) / 2}px")
+							-# .service_img
+								- case cell.content.combined_service
+								- when 'facebook'
+									= image_tag('social_media_logos/facebook_32.png')
+								-	when 'twitter'
+									= image_tag('social_media_logos/twitter_32.png')
+								- when 'tumblr'
+									= image_tag('social_media_logos/tumblr_32.png')
+				.clear 
+%h2 portraits			
+- @portraits.each do |portrait|
+	= image_tag(portrait.image.data)
+
+%h2 landscapes
+- @landscapes.each do |landscape|
+	= image_tag(landscape.image.data)

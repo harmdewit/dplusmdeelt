@@ -1,0 +1,60 @@
+!!!
+%html
+	%head
+		%title Portal	
+		= stylesheet_link_tag 'admin/reset.css'
+		= stylesheet_link_tag 'admin/main.css'
+		= stylesheet_link_tag 'admin/css3.css'
+		= stylesheet_link_tag 'admin/custom-theme/jquery-ui-1.8.1.custom.css'
+
+		= javascript_include_tag 'jquery'	
+		= javascript_include_tag 'jquery.min'
+		= javascript_include_tag 'rails'
+		= javascript_include_tag 'admin/jquery-ui.min.js'
+		= javascript_include_tag 'admin/jquery.wysiwyg.js'
+		= javascript_include_tag 'admin/excanvas.js'
+		= javascript_include_tag 'admin/jquery.visualize.js'
+		= javascript_include_tag 'admin/script.js'
+		= csrf_meta_tag
+		
+	%body
+		#overlay2
+			#centerpack
+				#modal
+		#bokeh
+			#container
+				#header
+					%h1#logo Admin Control Panel
+					
+					#header_buttons
+						- if admin_signed_in?
+							= link_to "Logged in as #{current_admin.email}", '#'
+							= link_to "sign out", destroy_admin_session_path
+						- else
+							= link_to "Register", new_admin_registration_path
+							= link_to "Sign in", new_admin_session_path
+						= link_to "DplusM Social Feed", root_path
+							
+					%ul#main-nav
+						- if params[:controller] == "admin/application"
+							%li= link_to "Home", admin_root_path, {:class => "current"}
+						- else params[:controller] == "admin/application"
+							%li= link_to "Home", admin_root_path
+
+						- if params[:controller] == "admin/linked_accounts"
+							%li= link_to "Linked Accounts", admin_linked_accounts_path, {:class => "current"}
+						- else 
+							%li= link_to "Linked Accounts", admin_linked_accounts_path
+				#content
+					- if notice
+						.notification.success= notice
+					- if alert
+						.notification.alert= alert
+					%h2
+						=image_tag(@h2_image)
+						=@h2
+					.content-box
+						.content-box-header
+							%h3= @header
+						.content-box-content
+							=yield

@@ -1,0 +1,2 @@
+module Admin::LinkedAccountsHelper
+end

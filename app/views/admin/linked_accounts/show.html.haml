@@ -1,0 +1,24 @@
+- @header = 'All Linked Accounts'
+- @h2 = 'Linked Accounts'
+- @h2_image = 'admin/icons/user_32.png'
+
+%p
+	%b Provider:
+	= @linked_account.provider
+%p
+	%b Name:
+	= @linked_account.name
+%p
+	%b Nickname:
+	= @linked_account.nickname
+%p	
+	%b Email:
+	= @linked_account.email
+%p
+	%b Description:
+	= @linked_account.description
+
+= link_to 'Edit', edit_admin_linked_account_path(@linked_account)
+\|
+= link_to 'Back', admin_linked_accounts_path
+

@@ -1,0 +1,32 @@
+#slider_container.clearfix
+	- i = 0
+	- j = 0
+	- @pages.each do |page|
+		.container_12.clearfix
+			%h1 Images
+
+			- for row in 1..5 do
+				.img_height_1.image_frame
+					- for column in 1..6 do
+						- post = @image_posts[i]
+						- img_width = post.image.width
+						- img_height = post.image.height
+						- width = 2
+						- height = 1
+						- ratio = Rational(width * 80, img_width)
+						- new_img_height = (Rational(width * 80, img_width) * img_height).to_i
+						- new_img_width = (Rational(height * 125, img_height) * img_width).to_i
+						- if ((width * 80) * img_height) >= ((height * 125) * img_width)
+							- orientation = 'landscape'
+						- else
+							- orientation = 'portrait'
+						%div{:class => "img_2 img_#{orientation}"}
+							%a.gallery_item{:href => post.image.data, :rel => 'group_1', :title => post.image.description}
+								- if orientation == 'landscape'
+									= image_tag(post.image.data, :style => "margin-top: #{(height * 125 - new_img_height) / 2}px")
+								- else 
+									= image_tag(post.image.data, :style => "margin-left: #{(width * 80 - new_img_width) / 2}px")
+			
+						- i += 1
+						- if i == @image_posts.length
+							- i = 0
