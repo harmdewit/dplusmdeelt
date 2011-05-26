@@ -199,7 +199,7 @@ DEPENDENCIES
   hashie
   imagesize
   jquery-rails (>= 0.2.6)
-  mysql2 (<= 0.3)
+  mysql2
   nifty-generators
   omniauth
   rails (= 3.0.3)
