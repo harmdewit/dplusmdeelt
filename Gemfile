@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.3'
 gem 'haml'
 gem 'haml-rails'
-# gem 'mysql2', '< 0.3'
 gem 'hashie'
 gem 'twitter'
 gem 'jquery-rails', '>= 0.2.6'
@@ -28,6 +27,9 @@ group :development do
 	gem "compass", ">= 0.11.1"
 end
 
+group :production do
+	gem 'mysql2', '< 0.3'
+end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
