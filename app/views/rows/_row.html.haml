@@ -1,4 +1,4 @@
 %div{:class => "height_#{row.height}"}
 	= render row.columns
-- unless row == row.page.rows.last
-	%hr.horizontal_divider.grid_12
+	- unless row == row.page.rows.last
+		.horizontal_divider

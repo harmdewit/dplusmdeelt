@@ -21,7 +21,6 @@
 .height_4 {
 	width: 100%;
 	position: relative;
-	overflow: hidden;
 	float: left;
 	margin: 10px 0px;
 }

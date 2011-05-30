@@ -7,8 +7,10 @@ gem 'hashie'
 gem 'twitter'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'devise'
-gem 'omniauth'
+gem 'omniauth', '>= 0.2.2'
 gem 'rake', '~> 0.8.7'
+gem 'faraday', '>= 0.6.1'
+gem 'nokogiri'
 
 # image analysis library
 gem 'imagesize'

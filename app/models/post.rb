@@ -4,12 +4,14 @@ require "image_size"
 require 'net/http'
 class Post < ActiveRecord::Base
   
-  belongs_to :column
+  belongs_to :column, :dependent => :destroy
   belongs_to :linked_account
   belongs_to :facebook_page, :foreign_key => :linked_account_id
-  has_one :article
-  has_one :status
-  has_one :image
+  has_one :article, :dependent => :destroy
+  has_one :status, :dependent => :destroy
+  has_one :image, :dependent => :destroy
+  has_one :video, :dependent => :destroy
+  has_one :link, :dependent => :destroy
   validates_presence_of :post_type 
   validates_uniqueness_of :service_post_id, :scope => :service
   
@@ -45,7 +47,7 @@ class Post < ActiveRecord::Base
   end
   
   def self.twitter_posts(la)
-    twitter_response = Twitter.user_timeline(la.name)
+    twitter_response = Twitter.user_timeline(la.nickname)
 
     # Twitter posts
     twitter_response.each do |p|
@@ -54,7 +56,8 @@ class Post < ActiveRecord::Base
       post.date_created = DateTime.parse(p.created_at)
     
       # Do not save Twitter posts coming from the registered applications Facebook and Tumblr
-      unless p['source'] == (('<a href="http://www.facebook.com/twitter" rel="nofollow">Facebook</a>') || ('<a href="http://www.tumblr.com/" rel="nofollow">Tumblr</a>'))
+      
+      unless p['source'].match(/http:\/\/www.tumblr.com\//) || p['source'].match(/http:\/\/www.facebook.com\/twitter/)
         post.service_post_id = p['id']
         post.post_type = 'status'
         post.link_to_post = "http://twitter.com/#{p['user']['name']}/status/#{p['id']}"
@@ -179,9 +182,10 @@ class Post < ActiveRecord::Base
             item.post_id = post.id
             item.title = p['regular_title']
             item.original_body = p['regular_body']
-            image_data = p['regular_body'].match(/<img.*src="(.*?)"\/>/)
-            if image_data.presence 
-              item.image_data = image_data.captures.first
+            image_element = Nokogiri::HTML.parse(p['regular_body']).search('img')
+            
+            if image_element.presence 
+              item.image_data = image_element.first['src']
             end
             image_elements = p['regular_body'].scan(/<img\b[^>]*(\/>)/)
             if image_elements.presence
@@ -237,7 +241,7 @@ class Post < ActiveRecord::Base
             item.post_id = post.id
             item.title = p['title']
             item.body = p['embed']
-            item.description = p['caption']
+            # item.description = p['video_caption']
           end
         end
       when 'audio'

@@ -1,66 +1,62 @@
 #nav
 	%ul#years
 		- @years.each do |year|
-			%li
+			%li.year
 				= link_to root_path do
-					= image_tag('nav_arrow_year.jpg')
+					= image_tag('nav_arrow_year_right.png')
 					= year[:year]
 					
 				%ul#months
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow_v2.png', :id => 'nav_last_img')
-							December
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							November
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							Oktober
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							September
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							Augustus
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							Juli
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							Juni
 					- year[:months].each do |month|
-						%li
-							= link_to  magazine_path(:year => year[:year], :month => month) do
-								= image_tag('nav_arrow.jpg')
-								= Date::MONTHNAMES[month]
-							
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							Februari
+						- if month[:active] == true
+							- if month[:current] == true
+								%li.month.active.current
+									= link_to	magazine_path(:year => year[:year], :month => month[:month]) do
+										= image_tag('nav_arrow_left.png', :class => 'nav_arrow_left')
+										= image_tag('nav_arrow_right.png', :class => 'nav_arrow_right')
+										%p= Date::MONTHNAMES[month[:month]]
+							- else
+								%li.month.active
+									= link_to	magazine_path(:year => year[:year], :month => month[:month]) do
+										= image_tag('nav_arrow_left.png', :class => 'nav_arrow_left')
+										= image_tag('nav_arrow_right.png', :class => 'nav_arrow_right')
+										%p= Date::MONTHNAMES[month[:month]]
 
-					%li 		
-						= link_to root_path do
-							= image_tag('nav_arrow.jpg')
-							Januari
+						- elsif month[:active] == false
+							%li.month.nav_false
+								= image_tag('nav_arrow_false_left.png', :class => 'nav_arrow_left')
+								= image_tag('nav_arrow_false_right.png', :class => 'nav_arrow_right')
+								%p= Date::MONTHNAMES[month[:month]]
+
 						
 
 
 
 
 #slider_area
-				
+	
+	%br
+	%ul#page_nav
+		- @pages.each_index do |i|
+			%li
+				%a{:href => "#page_#{i}", :class => i}= i + 1			
+
 	#arrows
 		#arrows_positioner
-			= image_tag('previous_arrow_gray.png', :id => 'previous_arrow')
-			= image_tag('next_arrow_gray.png', :id => 'next_arrow')
+			#previous_arrow
+			-if @previous_date.presence
+				#previous_date
+					= link_to	magazine_path(:year => @previous_date[:year], :month => @previous_date[:month], :anchor => 'last') do
+						%p.year= @previous_date[:year]
+						%p.month= Date::MONTHNAMES[@previous_date[:month]]
+
+			#next_arrow			
+			-if @next_date.presence
+				#next_date
+					= link_to	magazine_path(:year => @next_date[:year], :month => @next_date[:month], :anchor => 'first') do
+						%p.year= @next_date[:year]
+						%p.month= Date::MONTHNAMES[@next_date[:month]]
+				
 	#slider_container.clearfix
 		= render @pages
 		
@@ -70,10 +66,7 @@
 		
 
 			
-	%ul#page_nav
-		- @pages.each_index do |i|
-			%li
-				%a{:href => "#page_#{i}"}= i + 1	
+
 
 / #footer
 / 	%ul#statuses

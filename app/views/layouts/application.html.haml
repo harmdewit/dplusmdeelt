@@ -55,7 +55,35 @@
 		
 		= yield
 		
-		#footer
+		#footer_container
+			#footer.clearfix
+				%a#portrait_footer{:href => "http://dplusm.nl", :title => "DplusM Website"}
+					= image_tag('dplusm_logo.jpg')
+				#contact
+					%ul
+						%li
+							%a{:href => "http://dplusm.nl"} Reclamebureau DplusM
+						%br/
+						%li Dorpsstraat 18, 5441 AC Oeffelt
+						%li Klokgebouw 151, 5617 AB Eindhoven
+						%li Postbus 330, 5430 AH Cuijk
+					%ul
+						%li
+							%br
+						%li
+							%br
+						%li T (0485) 31 52 85
+						%li F (0485) 31 88 66
+						%li KvK 17260763
+					%ul
+						%li
+							%br
+						%li
+							%br
+						%li welkom@dplusm.nl
+						%br/
+						%li K.v.K: 17260763 t.n.v. Reclamebureau TSM BV
+
 
 
 

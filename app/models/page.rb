@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  has_many :rows
+  has_many :rows, :dependent => :destroy
   named_scope :by_created_at, :order_by => 'oldest_post_date'
   
   

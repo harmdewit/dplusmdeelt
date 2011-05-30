@@ -23,6 +23,7 @@ $ninesixty-gutter-width: 18px;
 $nav: #000;
 $black: #000;
 $blue: #6990cb;
+$gray: gray;
 $light_blue: #c8d6ec;
 $darker_blue: #1b293e;
 
@@ -79,44 +80,69 @@ html, body{
 	position: relative;
 	margin: 0 auto;
 	height: 50px;
-	width: 962px;	
+	width: 960px;	
+
+
+
 	
-	a {
+	.year a, .month {
 		position: relative;
 		float: right;
-		width: 54px;
-		padding-right: 20px;
+		width: 59px;
+		padding-left: 16px;
+		height: 47px;
 		line-height: 47px;
 		text-align: center;
 		background-color: $nav;
 		text-decoration: none;	
 		color: white;
-		
-		&:hover {
-			color: $blue;}
-		
-		img {
-//			display: none;
+
+		p {
+			z-index: 2;}
+			
+		img.nav_arrow_left {
 			position: absolute;
-			right: 0;
-			height: 47px;}
+			left: 0;
+			top: 0;
+			height: 47px;
+			}
+		img.nav_arrow_right {
+			position: absolute;
+			left: 100%;
+			top: 0;
+			height: 47px;
+			}
+
+	}
+
+	a{ 
+		background-color: $nav;}
+		
+	.nav_false {
+		background-color: gray;
+		}
+	
+	.current a{
+		color: $blue;
 	}
 	
-	
+	a:hover {
+		color: $blue;}
 	
 	#years>li>a {
+		z-index: 1;
 		width: 44px;
-		border-left: solid $blue 10px;
-		@include border-left-radius(10px);
 		float: left;
 		
 		background-color: $blue;
 			
 		&:hover{
-			color: white;}
+			}
 			
 		img {
-			left: 60px;}
+			position: absolute;
+			height: 47px;
+			left: 100%;}
 	}
 	
 
@@ -134,21 +160,12 @@ html, body{
 }
 
 
-/* Slider area */
-#slider_area {
-	@include clearfix;
-	position: relative;
-	width: 100%;
-	margin-top: 10px;
-	border-top: 1px solid #5b5b5b;
-	border-bottom: 1px solid #5b5b5b;
-	overflow: hidden;
-	background-color: $black;
-}
+
 
 #page_nav {
 	text-align: center;
 	margin: 0 0 15px;
+	
 	li {
 		display: inline;
 		margin: 5px;}
@@ -156,6 +173,7 @@ html, body{
 	li a{
 		padding: 4px 8px;
 		background-color: $blue;
+		text-decoration: none;
 		color: white;}
 }
 
@@ -168,17 +186,81 @@ html, body{
 	z-index: 9;
 
 	#arrows_positioner {
-		background: red;
+		position: relative;
 		max-width: 1200px;
 		min-width: 960px;
 		margin: 0 auto;
 			
-		#previous_arrow {
-			float: left;}
+		&>div {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			cursor: pointer;
+		}
+			
+		#previous_date, #next_date{
+//			display: none;
+			line-height: 100px;
+			text-align: center;
+			color: white;
+			background-color: $gray;
+			
+			&:hover {
+				background-color: $blue;
+			};
+			
+			a {
+				text-decoration: none;
+				color: white;
+			}
 
-		#next_arrow {
-			float: right;}
+			p.year {
+				margin-top: 20px;
+				line-height: 20px;
+				color: white;
+				font-size: 20px;
+			}
+			p.month {
+				line-height: 40px;
+				font-size: 30px;
+			}
+		}
+		
+		#previous_arrow, #previous_date{
+			left: 0;
+		}
+		
+		#next_arrow, #next_date {
+			right: 0;
+		}
+		
+		#previous_arrow{
+			background: url('../images/previous_arrow_gray_v2.png');
+			&:hover{
+				background: url('../images/previous_arrow_blue_v2.png');
+			}
+		}
+		
+		#next_arrow{
+			background: url('../images/next_arrow_gray_v2.png');
+			
+			&:hover{
+				background: url('../images/next_arrow_blue_v2.png');
+			}
+		}
 	}
+}
+
+/* Slider area */
+#slider_area {
+	@include clearfix;
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+//	border-top: 1px solid #5b5b5b;
+//	border-bottom: 1px solid #5b5b5b;
+	overflow: hidden;
+	background-color: $black;
 }
 
 #slider_container {
@@ -192,39 +274,46 @@ html, body{
 
 }
 
-#slider_container .container_12, i {
+#slider_container .page {
 	margin-left: 230px;
 	position: relative;
 	float: left;
 	background: white;
 }
 
-.post {
+.post_container {
 	position: relative;
 	height: 100%;
 	
-	.article_content {
-		text-decoration: none;
-		color: black;
+	.post {
+		position: relative;
+		height: 100%;
+		overflow: hidden;
 		
-		&:hover {
-			color: $blue;}
-	}
+		.article_content {
+			text-decoration: none;
+			color: black;
 		
-	.post_footer_container {
-		position: absolute;
-		bottom: 0px;
-		width: 100%;
-		height: 10px;
-		background: url('../images/post_footer_40px.png') repeat-x;
-		
-		.metadata_container {
-			position: absolute;
-			bottom: 0;
-			padding: 5px 10px 0 0;
-			background: url('../images/post_footer_40px.png') repeat-x;
-					
+			&:hover {
+				color: $blue;}
 		}
+		
+		.post_footer_container {
+			position: absolute;
+			bottom: 0px;
+			width: 100%;
+			height: 10px;
+			background: url('../images/post_footer_40px.png') repeat-x;
+		
+			.metadata_container {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				padding: 5px 10px 0 0;
+				background: url('../images/post_footer_40px.png') repeat-x;
+					
+			}
+		}		
 	}
 }
 
@@ -247,16 +336,18 @@ html, body{
 
 .horizontal_divider {
 	position: absolute;
-	width: 100%;
+	bottom: -15px;
+	left: 1.5%;
+	width: 97%;
 	height: 1px;
 	background-color: #bbb;
 }
 
 .vertical_divider {
 	position: absolute;
-	height: 100%;
+	height: 97%;
 	width: 1px;
-	top: 0px;
+	top: 1.5%;
 	right: -10px;
 	background-color: #bbb;
 }
@@ -415,22 +506,54 @@ img.right {
 	position:absolute;
 	right: 0px;
 	background: $light_blue;
+	padding: 0;
+	margin: 0;
+	
+	.height_3 {
+		margin: 0 10px;
+		height: 600px;
+	}
+	.status {
+		margin: 10px 0;
+	}
+}
+
+.height_1.footer {
+	height: 190px;
 }
 
 .footer {
-	border-top: 1px solid black;
-	background: $light_blue;
+	border-top  : 1px solid $blue;
+
+	background  : $light_blue;
+	margin      : 0;
+	
+	.status {
+		margin-top : 10px;
+	}
 }
 
+
 .status {
-	margin-bottom: 10px;
+	position: relative;
+	float: right;
+	height: 80px;
+	overflow: hidden;
+	background: url('../images/quote.png') no-repeat;
 	
+	p {
+		padding-left: 25px;
+	}
 	.status_person {
 		float: right;
-		max-width: 30px;}
+		max-width: 70px;
+		margin: 0 0 10px 10px;}
 	
 	
 	.meta_data {
+		position: absolute;
+		right: 0;
+		bottom: 0;
 		text-align: right;
 		img {
 			max-height: 18px;
@@ -438,6 +561,47 @@ img.right {
 	}
 
 }
+
+#footer_container {
+	width: 100%;
+	padding: 20px 0;
+	margin-top: 40px;
+}
+
+#footer {
+	margin: 0 auto;
+	width: 960px;
+	line-height: 24px;
+	text-align: left;
+	font-weight: bold;
+	color: black;
+}
+
+#portrait_footer {
+	display: inline;
+	float: left;
+	width: 140px;
+	margin: 0 10px;
+	
+	img {
+		max-width: 140px;
+	}
+}
+    
+#footer a, #footer a:active, #footer a:visited {
+	font-style: none;
+  color: $blue;
+}
+
+#contact ul{
+	float   : left;
+	display : inline;
+	margin  : 0 10px;
+}
+
+#contact ul {
+list-style: none;}
+
 /* Status Slider */
 
 //#footer {
