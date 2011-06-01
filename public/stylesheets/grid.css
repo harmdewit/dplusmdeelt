@@ -652,7 +652,7 @@ footer, header, hgroup, menu, nav, section {
   left: -900px;
 }
 
-/* line 34, ../../app/stylesheets/grid.scss */
+/* line 36, ../../app/stylesheets/grid.scss */
 #header {
   margin-left: auto;
   margin-right: auto;
@@ -661,12 +661,12 @@ footer, header, hgroup, menu, nav, section {
   height: 100px;
   padding: 10px;
 }
-/* line 40, ../../app/stylesheets/grid.scss */
+/* line 42, ../../app/stylesheets/grid.scss */
 #header img {
   max-width: 100px;
   max-height: 100px;
 }
-/* line 45, ../../app/stylesheets/grid.scss */
+/* line 47, ../../app/stylesheets/grid.scss */
 #header #brandbox {
   position: relative;
   display: inline;
@@ -680,7 +680,7 @@ footer, header, hgroup, menu, nav, section {
   height: 100%;
   background-color: #6990cb;
 }
-/* line 55, ../../app/stylesheets/grid.scss */
+/* line 57, ../../app/stylesheets/grid.scss */
 #header #share {
   width: 47px;
   height: 46px;
@@ -692,7 +692,7 @@ footer, header, hgroup, menu, nav, section {
   background: url("../images/share.png") 0px 10px no-repeat;
 }
 
-/* line 70, ../../app/stylesheets/grid.scss */
+/* line 72, ../../app/stylesheets/grid.scss */
 .container_12,
 .container_16 {
   margin-bottom: 0px;
@@ -702,14 +702,14 @@ footer, header, hgroup, menu, nav, section {
 }
 
 /*	Navigation	*/
-/* line 79, ../../app/stylesheets/grid.scss */
+/* line 81, ../../app/stylesheets/grid.scss */
 #nav {
   position: relative;
   margin: 0 auto;
   height: 50px;
   width: 960px;
 }
-/* line 88, ../../app/stylesheets/grid.scss */
+/* line 90, ../../app/stylesheets/grid.scss */
 #nav .year a, #nav .month {
   position: relative;
   float: right;
@@ -722,85 +722,89 @@ footer, header, hgroup, menu, nav, section {
   text-decoration: none;
   color: white;
 }
-/* line 100, ../../app/stylesheets/grid.scss */
+/* line 102, ../../app/stylesheets/grid.scss */
 #nav .year a p, #nav .month p {
   z-index: 2;
 }
-/* line 103, ../../app/stylesheets/grid.scss */
+/* line 105, ../../app/stylesheets/grid.scss */
 #nav .year a img.nav_arrow_left, #nav .month img.nav_arrow_left {
   position: absolute;
   left: 0;
   top: 0;
   height: 47px;
 }
-/* line 109, ../../app/stylesheets/grid.scss */
+/* line 111, ../../app/stylesheets/grid.scss */
 #nav .year a img.nav_arrow_right, #nav .month img.nav_arrow_right {
   position: absolute;
   left: 100%;
   top: 0;
   height: 47px;
 }
-/* line 118, ../../app/stylesheets/grid.scss */
+/* line 120, ../../app/stylesheets/grid.scss */
 #nav a {
   background-color: black;
 }
-/* line 121, ../../app/stylesheets/grid.scss */
+/* line 123, ../../app/stylesheets/grid.scss */
 #nav .nav_false {
   background-color: gray;
 }
-/* line 125, ../../app/stylesheets/grid.scss */
+/* line 127, ../../app/stylesheets/grid.scss */
 #nav .current a {
   color: #6990cb;
 }
-/* line 129, ../../app/stylesheets/grid.scss */
+/* line 131, ../../app/stylesheets/grid.scss */
 #nav a:hover {
   color: #6990cb;
 }
-/* line 132, ../../app/stylesheets/grid.scss */
+/* line 134, ../../app/stylesheets/grid.scss */
 #nav #years > li > a {
   z-index: 1;
   width: 44px;
   float: left;
   background-color: #6990cb;
 }
-/* line 142, ../../app/stylesheets/grid.scss */
+/* line 144, ../../app/stylesheets/grid.scss */
 #nav #years > li > a img {
   position: absolute;
   height: 47px;
   left: 100%;
 }
 
-/* line 152, ../../app/stylesheets/grid.scss */
+/* line 154, ../../app/stylesheets/grid.scss */
 .magazine_navigation {
   z-index: 1;
 }
 
-/* line 156, ../../app/stylesheets/grid.scss */
+/* line 158, ../../app/stylesheets/grid.scss */
 .magazine_navigation * {
   float: left;
   display: inline;
   margin: 0 10px;
 }
 
-/* line 165, ../../app/stylesheets/grid.scss */
+/* line 167, ../../app/stylesheets/grid.scss */
 #page_nav {
   text-align: center;
   margin: 0 0 15px;
 }
-/* line 169, ../../app/stylesheets/grid.scss */
+/* line 171, ../../app/stylesheets/grid.scss */
 #page_nav li {
   display: inline;
   margin: 5px;
 }
-/* line 173, ../../app/stylesheets/grid.scss */
+/* line 175, ../../app/stylesheets/grid.scss */
 #page_nav li a {
   padding: 4px 8px;
   background-color: #6990cb;
   text-decoration: none;
   color: white;
 }
+/* line 182, ../../app/stylesheets/grid.scss */
+#page_nav li:hover a {
+  text-decoration: underline;
+}
 
-/* line 181, ../../app/stylesheets/grid.scss */
+/* line 190, ../../app/stylesheets/grid.scss */
 #arrows {
   position: absolute;
   top: 40%;
@@ -808,75 +812,75 @@ footer, header, hgroup, menu, nav, section {
   height: 0;
   z-index: 9;
 }
-/* line 188, ../../app/stylesheets/grid.scss */
+/* line 197, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner {
   position: relative;
   max-width: 1200px;
   min-width: 960px;
   margin: 0 auto;
 }
-/* line 194, ../../app/stylesheets/grid.scss */
+/* line 203, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner > div {
   position: absolute;
   width: 100px;
   height: 100px;
   cursor: pointer;
 }
-/* line 201, ../../app/stylesheets/grid.scss */
+/* line 210, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_date, #arrows #arrows_positioner #next_date {
   line-height: 100px;
   text-align: center;
   color: white;
   background-color: gray;
 }
-/* line 208, ../../app/stylesheets/grid.scss */
+/* line 217, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_date:hover, #arrows #arrows_positioner #next_date:hover {
   background-color: #6990cb;
 }
-/* line 212, ../../app/stylesheets/grid.scss */
+/* line 221, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_date a, #arrows #arrows_positioner #next_date a {
   text-decoration: none;
   color: white;
 }
-/* line 217, ../../app/stylesheets/grid.scss */
+/* line 226, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_date p.year, #arrows #arrows_positioner #next_date p.year {
   margin-top: 20px;
   line-height: 20px;
   color: white;
   font-size: 20px;
 }
-/* line 223, ../../app/stylesheets/grid.scss */
+/* line 232, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_date p.month, #arrows #arrows_positioner #next_date p.month {
   line-height: 40px;
   font-size: 30px;
 }
-/* line 229, ../../app/stylesheets/grid.scss */
+/* line 238, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_arrow, #arrows #arrows_positioner #previous_date {
   left: 0;
 }
-/* line 233, ../../app/stylesheets/grid.scss */
+/* line 242, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #next_arrow, #arrows #arrows_positioner #next_date {
   right: 0;
 }
-/* line 237, ../../app/stylesheets/grid.scss */
+/* line 246, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_arrow {
   background: url("../images/previous_arrow_gray_v2.png");
 }
-/* line 239, ../../app/stylesheets/grid.scss */
+/* line 248, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #previous_arrow:hover {
   background: url("../images/previous_arrow_blue_v2.png");
 }
-/* line 244, ../../app/stylesheets/grid.scss */
+/* line 253, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #next_arrow {
   background: url("../images/next_arrow_gray_v2.png");
 }
-/* line 247, ../../app/stylesheets/grid.scss */
+/* line 256, ../../app/stylesheets/grid.scss */
 #arrows #arrows_positioner #next_arrow:hover {
   background: url("../images/next_arrow_blue_v2.png");
 }
 
 /* Slider area */
-/* line 255, ../../app/stylesheets/grid.scss */
+/* line 264, ../../app/stylesheets/grid.scss */
 #slider_area {
   overflow: hidden;
   *zoom: 1;
@@ -887,7 +891,7 @@ footer, header, hgroup, menu, nav, section {
   background-color: black;
 }
 
-/* line 266, ../../app/stylesheets/grid.scss */
+/* line 275, ../../app/stylesheets/grid.scss */
 #slider_container {
   padding: 10px 0;
   position: relative;
@@ -898,7 +902,7 @@ footer, header, hgroup, menu, nav, section {
   transition: 1s;
 }
 
-/* line 277, ../../app/stylesheets/grid.scss */
+/* line 286, ../../app/stylesheets/grid.scss */
 #slider_container .page {
   margin-left: 230px;
   position: relative;
@@ -906,27 +910,37 @@ footer, header, hgroup, menu, nav, section {
   background: white;
 }
 
-/* line 284, ../../app/stylesheets/grid.scss */
+/* line 293, ../../app/stylesheets/grid.scss */
 .post_container {
   position: relative;
   height: 100%;
 }
-/* line 288, ../../app/stylesheets/grid.scss */
+/* line 296, ../../app/stylesheets/grid.scss */
+.post_container a {
+  text-decoration: none;
+  color: black;
+}
+/* line 301, ../../app/stylesheets/grid.scss */
 .post_container .post {
   position: relative;
   height: 100%;
   overflow: hidden;
+  line-height: 24px;
 }
-/* line 293, ../../app/stylesheets/grid.scss */
-.post_container .post .article_content {
-  text-decoration: none;
-  color: black;
+/* line 307, ../../app/stylesheets/grid.scss */
+.post_container .post p {
+  color: #404040;
+  margin-bottom: 1.5em;
 }
-/* line 297, ../../app/stylesheets/grid.scss */
-.post_container .post .article_content:hover {
+/* line 312, ../../app/stylesheets/grid.scss */
+.post_container .post:hover h2, .post_container .post:hover p {
   color: #6990cb;
 }
-/* line 301, ../../app/stylesheets/grid.scss */
+/* line 316, ../../app/stylesheets/grid.scss */
+.post_container .post:hover {
+  cursor: pointer;
+}
+/* line 320, ../../app/stylesheets/grid.scss */
 .post_container .post .post_footer_container {
   position: absolute;
   bottom: 0px;
@@ -934,7 +948,7 @@ footer, header, hgroup, menu, nav, section {
   height: 10px;
   background: url("../images/post_footer_40px.png") repeat-x;
 }
-/* line 308, ../../app/stylesheets/grid.scss */
+/* line 327, ../../app/stylesheets/grid.scss */
 .post_container .post .post_footer_container .metadata_container {
   position: absolute;
   right: 0;
@@ -943,7 +957,7 @@ footer, header, hgroup, menu, nav, section {
   background: url("../images/post_footer_40px.png") repeat-x;
 }
 
-/* line 320, ../../app/stylesheets/grid.scss */
+/* line 339, ../../app/stylesheets/grid.scss */
 .metadata {
   text-decoration: none;
   font-size: 13px;
@@ -951,18 +965,18 @@ footer, header, hgroup, menu, nav, section {
   color: black;
   opacity: 0.5;
 }
-/* line 327, ../../app/stylesheets/grid.scss */
+/* line 346, ../../app/stylesheets/grid.scss */
 .metadata:hover {
   opacity: 1;
   color: #6990cb;
 }
-/* line 331, ../../app/stylesheets/grid.scss */
+/* line 350, ../../app/stylesheets/grid.scss */
 .metadata img {
   max-height: 18px;
   vertical-align: bottom;
 }
 
-/* line 337, ../../app/stylesheets/grid.scss */
+/* line 356, ../../app/stylesheets/grid.scss */
 .horizontal_divider {
   position: absolute;
   bottom: -15px;
@@ -972,7 +986,7 @@ footer, header, hgroup, menu, nav, section {
   background-color: #bbb;
 }
 
-/* line 346, ../../app/stylesheets/grid.scss */
+/* line 365, ../../app/stylesheets/grid.scss */
 .vertical_divider {
   position: absolute;
   height: 97%;
@@ -982,53 +996,75 @@ footer, header, hgroup, menu, nav, section {
   background-color: #bbb;
 }
 
-/* line 355, ../../app/stylesheets/grid.scss */
+/* line 374, ../../app/stylesheets/grid.scss */
+.share_buttons {
+  width: 200px;
+  float: right;
+}
+
+/* line 379, ../../app/stylesheets/grid.scss */
+.fancybox_article {
+  padding-right: 25px;
+  padding-bottom: 75px;
+  line-height: 24px;
+}
+/* line 385, ../../app/stylesheets/grid.scss */
+.fancybox_article h1 {
+  line-height: 40px;
+}
+/* line 389, ../../app/stylesheets/grid.scss */
+.fancybox_article p {
+  color: #404040;
+  margin-bottom: 1.5em;
+}
+
+/* line 395, ../../app/stylesheets/grid.scss */
 img.portrait {
   max-width: 100%;
   max-height: 50%;
   margin-bottom: 10px;
 }
 
-/* line 361, ../../app/stylesheets/grid.scss */
+/* line 401, ../../app/stylesheets/grid.scss */
 img.landscape {
   max-height: 100%;
   max-width: 50%;
 }
 
-/* line 366, ../../app/stylesheets/grid.scss */
+/* line 406, ../../app/stylesheets/grid.scss */
 img.left {
   float: left;
   margin: 0px 10px 10px 0px;
 }
 
-/* line 371, ../../app/stylesheets/grid.scss */
+/* line 411, ../../app/stylesheets/grid.scss */
 img.right {
   float: right;
   margin: 0px 0px 10px 10px;
 }
 
-/* line 376, ../../app/stylesheets/grid.scss */
+/* line 416, ../../app/stylesheets/grid.scss */
 .image_frame div {
   overflow: hidden;
 }
 
-/* line 380, ../../app/stylesheets/grid.scss */
+/* line 420, ../../app/stylesheets/grid.scss */
 .image_frame {
   margin: 2px 0px;
 }
 
-/* line 384, ../../app/stylesheets/grid.scss */
+/* line 424, ../../app/stylesheets/grid.scss */
 .image_frame div:first-child {
   /*	margin-left: -2px;
   */
 }
 
-/* line 388, ../../app/stylesheets/grid.scss */
+/* line 428, ../../app/stylesheets/grid.scss */
 .image_frame div:last-child {
   margin-right: -8px;
 }
 
-/* line 403, ../../app/stylesheets/grid.scss */
+/* line 443, ../../app/stylesheets/grid.scss */
 .img_1,
 .img_2,
 .img_3,
@@ -1049,116 +1085,116 @@ img.right {
   margin-right: 6px;
 }
 
-/* line 412, ../../app/stylesheets/grid.scss */
+/* line 452, ../../app/stylesheets/grid.scss */
 .container_12 .img_1 {
   width: 68px;
 }
 
-/* line 416, ../../app/stylesheets/grid.scss */
+/* line 456, ../../app/stylesheets/grid.scss */
 .container_12 .img_2 {
   width: 148px;
 }
 
-/* line 420, ../../app/stylesheets/grid.scss */
+/* line 460, ../../app/stylesheets/grid.scss */
 .container_12 .img_3 {
   width: 228px;
 }
 
-/* line 424, ../../app/stylesheets/grid.scss */
+/* line 464, ../../app/stylesheets/grid.scss */
 .container_12 .img_4 {
   width: 308px;
 }
 
-/* line 428, ../../app/stylesheets/grid.scss */
+/* line 468, ../../app/stylesheets/grid.scss */
 .container_12 .img_5 {
   width: 388px;
 }
 
-/* line 432, ../../app/stylesheets/grid.scss */
+/* line 472, ../../app/stylesheets/grid.scss */
 .container_12 .img_6 {
   width: 468px;
 }
 
-/* line 436, ../../app/stylesheets/grid.scss */
+/* line 476, ../../app/stylesheets/grid.scss */
 .container_12 .img_7 {
   width: 548px;
 }
 
-/* line 440, ../../app/stylesheets/grid.scss */
+/* line 480, ../../app/stylesheets/grid.scss */
 .container_12 .img_8 {
   width: 628px;
 }
 
-/* line 444, ../../app/stylesheets/grid.scss */
+/* line 484, ../../app/stylesheets/grid.scss */
 .container_12 .img_9 {
   width: 708px;
 }
 
-/* line 448, ../../app/stylesheets/grid.scss */
+/* line 488, ../../app/stylesheets/grid.scss */
 .container_12 .img_10 {
   width: 788px;
 }
 
-/* line 452, ../../app/stylesheets/grid.scss */
+/* line 492, ../../app/stylesheets/grid.scss */
 .container_12 .img_11 {
   width: 868px;
 }
 
-/* line 456, ../../app/stylesheets/grid.scss */
+/* line 496, ../../app/stylesheets/grid.scss */
 .container_12 .img_12 {
   width: 948px;
 }
 
-/* line 460, ../../app/stylesheets/grid.scss */
+/* line 500, ../../app/stylesheets/grid.scss */
 .image_frame img {
   z-index: 1;
 }
 
-/* line 465, ../../app/stylesheets/grid.scss */
+/* line 505, ../../app/stylesheets/grid.scss */
 .image_frame p {
   position: absolute;
   z-index: 9;
   color: red;
 }
 
-/* line 471, ../../app/stylesheets/grid.scss */
+/* line 511, ../../app/stylesheets/grid.scss */
 .img_height_1 {
   height: 125px;
 }
 
-/* line 475, ../../app/stylesheets/grid.scss */
+/* line 515, ../../app/stylesheets/grid.scss */
 .img_height_2 {
   height: 125px;
 }
 
-/* line 479, ../../app/stylesheets/grid.scss */
+/* line 519, ../../app/stylesheets/grid.scss */
 .img_height_3 {
   height: 187.6px;
 }
 
-/* line 483, ../../app/stylesheets/grid.scss */
+/* line 523, ../../app/stylesheets/grid.scss */
 .img_height_4 {
   height: 500px;
 }
 
-/* line 487, ../../app/stylesheets/grid.scss */
+/* line 527, ../../app/stylesheets/grid.scss */
 .img_height_5 {
   height: 625px;
 }
 
-/* line 493, ../../app/stylesheets/grid.scss */
+/* line 533, ../../app/stylesheets/grid.scss */
 .img_portrait img {
   min-height: 100%;
   max-height: 100%;
 }
 
-/* line 499, ../../app/stylesheets/grid.scss */
+/* line 539, ../../app/stylesheets/grid.scss */
 .img_landscape img {
   min-width: 100%;
   max-width: 100%;
 }
 
-/* line 504, ../../app/stylesheets/grid.scss */
+/* line 544, ../../app/stylesheets/grid.scss */
 .sidebar {
   border-left: 1px solid #6990cb;
   position: absolute;
@@ -1167,33 +1203,33 @@ img.right {
   padding: 0;
   margin: 0;
 }
-/* line 512, ../../app/stylesheets/grid.scss */
+/* line 552, ../../app/stylesheets/grid.scss */
 .sidebar .height_3 {
   margin: 0 10px;
   height: 600px;
 }
-/* line 516, ../../app/stylesheets/grid.scss */
+/* line 556, ../../app/stylesheets/grid.scss */
 .sidebar .status {
   margin: 10px 0;
 }
 
-/* line 521, ../../app/stylesheets/grid.scss */
+/* line 561, ../../app/stylesheets/grid.scss */
 .height_1.footer {
   height: 190px;
 }
 
-/* line 525, ../../app/stylesheets/grid.scss */
+/* line 565, ../../app/stylesheets/grid.scss */
 .footer {
   border-top: 1px solid #6990cb;
   background: #c8d6ec;
   margin: 0;
 }
-/* line 531, ../../app/stylesheets/grid.scss */
+/* line 571, ../../app/stylesheets/grid.scss */
 .footer .status {
   margin-top: 10px;
 }
 
-/* line 537, ../../app/stylesheets/grid.scss */
+/* line 577, ../../app/stylesheets/grid.scss */
 .status {
   position: relative;
   float: right;
@@ -1201,37 +1237,47 @@ img.right {
   overflow: hidden;
   background: url("../images/quote.png") no-repeat;
 }
-/* line 544, ../../app/stylesheets/grid.scss */
+/* line 583, ../../app/stylesheets/grid.scss */
 .status p {
   padding-left: 25px;
 }
-/* line 547, ../../app/stylesheets/grid.scss */
+/* line 586, ../../app/stylesheets/grid.scss */
 .status .status_person {
   float: right;
   max-width: 70px;
   margin: 0 0 10px 10px;
 }
-/* line 553, ../../app/stylesheets/grid.scss */
+/* line 592, ../../app/stylesheets/grid.scss */
 .status .meta_data {
   position: absolute;
   right: 0;
   bottom: 0;
   text-align: right;
 }
-/* line 558, ../../app/stylesheets/grid.scss */
+/* line 597, ../../app/stylesheets/grid.scss */
 .status .meta_data img {
   max-height: 18px;
   vertical-align: bottom;
 }
 
-/* line 565, ../../app/stylesheets/grid.scss */
+/* line 604, ../../app/stylesheets/grid.scss */
+.sidebar a, .footer a {
+  text-decoration: none;
+  color: #404040;
+}
+/* line 608, ../../app/stylesheets/grid.scss */
+.sidebar a:hover, .footer a:hover {
+  color: #6990cb;
+}
+
+/* line 613, ../../app/stylesheets/grid.scss */
 #footer_container {
   width: 100%;
   padding: 20px 0;
   margin-top: 40px;
 }
 
-/* line 571, ../../app/stylesheets/grid.scss */
+/* line 619, ../../app/stylesheets/grid.scss */
 #footer {
   margin: 0 auto;
   width: 960px;
@@ -1241,39 +1287,39 @@ img.right {
   color: black;
 }
 
-/* line 580, ../../app/stylesheets/grid.scss */
+/* line 628, ../../app/stylesheets/grid.scss */
 #portrait_footer {
   display: inline;
   float: left;
   width: 140px;
   margin: 0 10px;
 }
-/* line 586, ../../app/stylesheets/grid.scss */
+/* line 634, ../../app/stylesheets/grid.scss */
 #portrait_footer img {
   max-width: 140px;
 }
 
-/* line 591, ../../app/stylesheets/grid.scss */
+/* line 639, ../../app/stylesheets/grid.scss */
 #footer a, #footer a:active, #footer a:visited {
   font-style: none;
   color: #6990cb;
 }
 
-/* line 596, ../../app/stylesheets/grid.scss */
+/* line 644, ../../app/stylesheets/grid.scss */
 #contact ul {
   float: left;
   display: inline;
   margin: 0 10px;
 }
 
-/* line 602, ../../app/stylesheets/grid.scss */
+/* line 650, ../../app/stylesheets/grid.scss */
 #contact ul {
   list-style: none;
 }
 
 /* Status Slider */
 /* frontpage */
-/* line 670, ../../app/stylesheets/grid.scss */
+/* line 718, ../../app/stylesheets/grid.scss */
 .frontpage_title {
   margin: 10px;
   position: absolute;
@@ -1286,14 +1332,19 @@ img.right {
 }
 
 /* image gallery */
-/* line 681, ../../app/stylesheets/grid.scss */
+/* line 729, ../../app/stylesheets/grid.scss */
 .image_frame > div > img {
   opacity: 0.6;
 }
 
-/* line 685, ../../app/stylesheets/grid.scss */
+/* line 733, ../../app/stylesheets/grid.scss */
 .image_frame img:hover {
   opacity: 1;
+}
+
+/* line 737, ../../app/stylesheets/grid.scss */
+.error {
+  color: white;
 }
 
 /* Typography */
@@ -1313,23 +1364,35 @@ img.right {
   font-style: normal;
 }
 
-/* line 715, ../../app/stylesheets/grid.scss */
+@font-face {
+  font-family: 'PlanerRegular';
+  src: url("../fonts/planer/planer_reg-webfont.eot");
+  src: url("../fonts/planer/planer_reg-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/planer/planer_reg-webfont.woff") format("woff"), url("../fonts/planer/planer_reg-webfont.ttf") format("truetype"), url("../fonts/planer/planer_reg-webfont.svg#PlanerRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 778, ../../app/stylesheets/grid.scss */
 h1 {
-  font-family: 'Planer';
+  font-family: 'PlanerRegular';
   font-size: 40px;
 }
 
-/* line 720, ../../app/stylesheets/grid.scss */
+/* line 783, ../../app/stylesheets/grid.scss */
 h2 {
   font-family: 'Planer';
-  font-weight: bold;
-  font-size: 24px;
+  font-size: 34px;
   line-height: 1em;
   margin-bottom: 5px;
 }
 
-/* line 728, ../../app/stylesheets/grid.scss */
+/* line 791, ../../app/stylesheets/grid.scss */
 body {
   font-size: 13px;
-  font-family: helvetica;
+  font-family: calibri, sans-serif;
+}
+
+/* line 796, ../../app/stylesheets/grid.scss */
+strong {
+  font-weight: bold;
 }

@@ -23,9 +23,11 @@ $ninesixty-gutter-width: 18px;
 $nav: #000;
 $black: #000;
 $blue: #6990cb;
+$white: #fff;
 $gray: gray;
 $light_blue: #c8d6ec;
 $darker_blue: #1b293e;
+$text_color: #404040;
 
 html, body{
 //	overflow-x: hidden;
@@ -174,7 +176,14 @@ html, body{
 		padding: 4px 8px;
 		background-color: $blue;
 		text-decoration: none;
-		color: white;}
+		color: $white;
+	}
+		
+	li:hover a{
+		text-decoration: underline;
+	}
+
+		
 }
 
 
@@ -274,7 +283,7 @@ html, body{
 
 }
 
-#slider_container .page {
+#slider_container .page, {
 	margin-left: 230px;
 	position: relative;
 	float: left;
@@ -284,18 +293,28 @@ html, body{
 .post_container {
 	position: relative;
 	height: 100%;
+	a {
+		text-decoration: none;
+		color: $black;
+	}
 	
 	.post {
 		position: relative;
 		height: 100%;
-		overflow: hidden;
+		overflow: hidden;		
+		line-height: 24px;
+
+		p {
+			color: $text_color;
+			margin-bottom: 1.5em;
+		}
 		
-		.article_content {
-			text-decoration: none;
-			color: black;
+		&:hover h2, &:hover  p {
+			color: $blue;
+		}
 		
-			&:hover {
-				color: $blue;}
+		&:hover {
+			cursor: pointer;
 		}
 		
 		.post_footer_container {
@@ -350,6 +369,27 @@ html, body{
 	top: 1.5%;
 	right: -10px;
 	background-color: #bbb;
+}
+
+.share_buttons {
+	width: 200px;
+	float: right;
+}
+
+.fancybox_article {
+	padding-right: 25px;
+	padding-bottom: 75px;
+	line-height: 24px;
+	
+	
+	h1 {
+		line-height: 40px;
+	}
+		
+	p {
+		color: $text_color;
+		margin-bottom: 1.5em;
+	}
 }
 
 img.portrait {
@@ -540,7 +580,6 @@ img.right {
 	height: 80px;
 	overflow: hidden;
 	background: url('../images/quote.png') no-repeat;
-	
 	p {
 		padding-left: 25px;
 	}
@@ -560,6 +599,15 @@ img.right {
 			vertical-align: bottom;}
 	}
 
+}
+
+.sidebar a, .footer a{
+	text-decoration: none;
+	color: $text_color;
+	
+	&:hover {
+		color: $blue;
+	}
 }
 
 #footer_container {
@@ -686,6 +734,9 @@ list-style: none;}
 	opacity: 1;
 }
 
+.error {
+	color: white;
+}
 
 /* Typography */
 
@@ -712,20 +763,36 @@ list-style: none;}
 		font-style: normal;
 }
 
+@font-face {
+    font-family: 'PlanerRegular';
+    src: url('../fonts/planer/planer_reg-webfont.eot');
+    src: url('../fonts/planer/planer_reg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/planer/planer_reg-webfont.woff') format('woff'),
+         url('../fonts/planer/planer_reg-webfont.ttf') format('truetype'),
+         url('../fonts/planer/planer_reg-webfont.svg#PlanerRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 h1 {
-	font-family: 'Planer';
+	font-family: 'PlanerRegular';
 	font-size: 40px;
 }
 
 h2 {
 	font-family: 'Planer';
-	font-weight: bold;
-	font-size: 24px;
+//	font-weight: bold;
+	font-size: 34px;
 	line-height: 1em;
 	margin-bottom: 5px;
 }
 
 body {
 		font-size: 13px ;
-	font-family: helvetica;
+	font-family: calibri, sans-serif;
+}
+
+strong {
+	font-weight: bold;
 }

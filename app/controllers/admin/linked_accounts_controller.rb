@@ -3,6 +3,12 @@ require "net/https"
 require 'hashie'
 
 class Admin::LinkedAccountsController < Admin::ApplicationController
+  
+  def synchronize
+    Post.synchronize
+    redirect_to admin_linked_accounts_url
+  end
+  
   # GET /admin/linked_accounts
   # GET /admin/linked_accounts.xml
   def index
@@ -12,6 +18,8 @@ class Admin::LinkedAccountsController < Admin::ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @linked_accounts }
     end
+    
+    
   end
 
   # GET /admin/linked_accounts/1

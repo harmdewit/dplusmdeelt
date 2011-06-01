@@ -29,7 +29,7 @@ class Post < ActiveRecord::Base
 
       end
     end
-    undisplayed_posts = Post.find_all_by_column_id(nil, :order => 'created_at DESC')
+    undisplayed_posts = Post.find_all_by_column_id(nil, :order => 'date_created ASC')
     Page.create_page(undisplayed_posts)
   end
   

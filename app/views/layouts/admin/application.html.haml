@@ -36,15 +36,15 @@
 						= link_to "DplusM Social Feed", root_path
 							
 					%ul#main-nav
-						- if params[:controller] == "admin/application"
-							%li= link_to "Home", admin_root_path, {:class => "current"}
-						- else params[:controller] == "admin/application"
-							%li= link_to "Home", admin_root_path
+						/ - if params[:controller] == "admin/application"
+						/ 	%li= link_to "Home", admin_root_path, {:class => "current"}
+						/ - else params[:controller] == "admin/application"
+						/ 	%li= link_to "Home", admin_root_path
 
-						- if params[:controller] == "admin/linked_accounts"
-							%li= link_to "Linked Accounts", admin_linked_accounts_path, {:class => "current"}
-						- else 
-							%li= link_to "Linked Accounts", admin_linked_accounts_path
+						/ - if params[:controller] == "admin/linked_accounts"
+						%li= link_to "Linked Accounts", admin_linked_accounts_path, {:class => "current"}
+						/ - else 
+						/ 	%li= link_to "Linked Accounts", admin_linked_accounts_path
 				#content
 					- if notice
 						.notification.success= notice

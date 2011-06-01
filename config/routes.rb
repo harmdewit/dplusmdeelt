@@ -7,13 +7,17 @@ Dplusm::Application.routes.draw do
   
   namespace :admin do
     resources :linked_accounts do
+      collection do
+        post 'synchronize', :as => :synchronize
+      end
       resources :facebook_pages, :only => [:new, :create]
     end
-    root :to => "application#index"
+    root :to => 'linked_accounts#index'
   end
 
   resources :magazine, :only => :index
   match 'magazine/:year/:month' => 'magazine#archive', :as => :magazine
+  match 'magazine/post/tumblr/:id' => 'magazine#tumblr_post', :as => :tumblr_post
   get "magazine/frontpage"
   get "magazine/images"
   get "magazine/images_alternative"

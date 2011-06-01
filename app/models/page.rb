@@ -12,18 +12,22 @@ class Page < ActiveRecord::Base
   
 
   def self.initialize_page
-    page = Page.create do |p|
-      p.active = 'false'
-      case @@ORIENTATIONS[rand(5)]
-      when 'sidebar'
-        p.page_type = 'sidebar'
-        p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
-      when 'footer'
-        p.page_type = 'footer'
-        p.max_articles = rand(@@MAX_ARTICLES - 1) + 2
-      when 'none'
-        p.page_type = 'none'
-        p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
+    if Page.find_by_active('false')
+      page = Page.find_by_active('false')
+    else
+      page = Page.create do |p|
+        p.active = 'false'
+        case @@ORIENTATIONS[rand(5)]
+        when 'sidebar'
+          p.page_type = 'sidebar'
+          p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
+        when 'footer'
+          p.page_type = 'footer'
+          p.max_articles = rand(@@MAX_ARTICLES - 1) + 2
+        when 'none'
+          p.page_type = 'none'
+          p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
+        end
       end
     end
     page
@@ -31,13 +35,10 @@ class Page < ActiveRecord::Base
 
   def self.create_page(undisplayed_posts)
     undisplayed_posts.delete_if {|x| x.post_type != 'article'}
-    if Page.find_by_active(false)
-      page = Page.find_by_active(false)
-    else
-      page = initialize_page
-    end
-    
+
+    page = initialize_page
     while undisplayed_posts.length > page.max_articles
+
       newest_post_date = Time.local(1900, 1, 1)
       oldest_post_date = Time.now
 
@@ -53,9 +54,9 @@ class Page < ActiveRecord::Base
         end
         saved_rows << saved_row
       end     
-      saved_rows.reverse!
+      # saved_rows.reverse!
       saved_rows.each do |row|
-        row.columns.reverse!
+        # row.columns.reverse!
         row.columns.each do |column|
           undisplayed_posts.first.update_attributes(:column_id => column.id)
           if DateTime.parse(undisplayed_posts.first.date_created) < oldest_post_date

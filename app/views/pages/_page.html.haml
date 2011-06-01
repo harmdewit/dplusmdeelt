@@ -7,15 +7,40 @@
 			- for status in 1..3 do
 				.grid_4
 					- for i in 1..2 do
+						%a{:href => @statuses[i].link_to_post}
+							.status
+								%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}
+								%p= @statuses[i].status.text
+								.clear
+								%br
+								.meta_data
+									- date = @statuses[i].date_created.to_time.localtime
+									= " #{date.day} #{Date::MONTHNAMES[date.month]}"
+									= "Geplaatst op"
+									- case @statuses[i].service
+									- when 'facebook'
+										= image_tag('social_media_logos/facebook_32.png')
+									-	when 'twitter'
+										= image_tag('social_media_logos/twitter_32.png')
+									- when 'tumblr'
+										= image_tag('social_media_logos/tumblr_32.png')
+						- i += 1
+								
+		.clear
+	- when 'sidebar'
+		.sidebar
+			.height_3.grid_4
+				- for status in 1..6 do
+					%a{:href => @statuses[i].link_to_post}
 						.status
-							%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}
+							%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}	
 							%p= @statuses[i].status.text
 							.clear
 							%br
 							.meta_data
 								- date = @statuses[i].date_created.to_time.localtime
-								= " #{date.day} #{Date::MONTHNAMES[date.month]}"
 								= "Geplaatst op"
+								= " #{date.day} #{Date::MONTHNAMES[date.month]}"
 								- case @statuses[i].service
 								- when 'facebook'
 									= image_tag('social_media_logos/facebook_32.png')
@@ -24,28 +49,5 @@
 								- when 'tumblr'
 									= image_tag('social_media_logos/tumblr_32.png')
 						- i += 1
-								
-		.clear
-	- when 'sidebar'
-		.sidebar
-			.height_3.grid_4
-				- for status in 1..6 do
-					.status
-						%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}	
-						%p= @statuses[i].status.text
-						.clear
-						%br
-						.meta_data
-							- date = @statuses[i].date_created.to_time.localtime
-							= "Geplaatst op"
-							= " #{date.day} #{Date::MONTHNAMES[date.month]}"
-							- case @statuses[i].service
-							- when 'facebook'
-								= image_tag('social_media_logos/facebook_32.png')
-							-	when 'twitter'
-								= image_tag('social_media_logos/twitter_32.png')
-							- when 'tumblr'
-								= image_tag('social_media_logos/tumblr_32.png')
-					- i += 1
 				.clear
 		.clear

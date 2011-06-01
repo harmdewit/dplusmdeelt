@@ -22,5 +22,10 @@ Dplusm::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+  
+  config.after_initialize do
+    Configuration.twitter_username = 'hdwtest1'
+    Configuration.disqus_shortname = 'hdwtest1'
+  end
 end
 
