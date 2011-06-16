@@ -1,6 +1,7 @@
 class Page < ActiveRecord::Base
   has_many :rows, :dependent => :destroy
-  named_scope :by_created_at, :order_by => 'oldest_post_date'
+  has_many :posts
+  scope :by_created_at, :order_by => 'oldest_post_date'
   
   
   @@MAX_COLUMN_WIDTH = 12
@@ -29,6 +30,15 @@ class Page < ActiveRecord::Base
           p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
         end
       end
+      
+      page_rows = get_rows(page)
+
+      page_rows[:rows].each do |row|
+        created_row = page.rows.create(:height => row[:row_height])
+        row[:columns].each do |column|
+          created_column = created_row.columns.create(:width => column[:column_width], :orientation => column[:orientation])
+        end
+      end
     end
     page
   end
@@ -37,47 +47,71 @@ class Page < ActiveRecord::Base
     undisplayed_posts.delete_if {|x| x.post_type != 'article'}
 
     page = initialize_page
-    while undisplayed_posts.length > page.max_articles
+
+    while undisplayed_posts.length > 0
 
       newest_post_date = Time.local(1900, 1, 1)
       oldest_post_date = Time.now
 
-      page_rows = get_rows(page)
-      orientation = page_rows[:orientation]
-
-      saved_rows = []
-
-      page_rows[:rows].each do |row|
-        saved_row = page.rows.create(:height => row[:row_height])
-        row[:columns].each do |column|
-          saved_column = saved_row.columns.create(:width => column[:column_width], :orientation => column[:orientation])
-        end
-        saved_rows << saved_row
-      end     
-      # saved_rows.reverse!
-      saved_rows.each do |row|
-        # row.columns.reverse!
+      page.rows.each do |row|
         row.columns.each do |column|
-          undisplayed_posts.first.update_attributes(:column_id => column.id)
-          if DateTime.parse(undisplayed_posts.first.date_created) < oldest_post_date
-            oldest_post_date = DateTime.parse(undisplayed_posts.first.date_created) 
+          unless (Post.find_by_column_id(column.id)) || (! undisplayed_posts.first.present?)
+            undisplayed_posts.first.update_attributes(:column_id => column.id, :page_id => page.id, :state => "permanent")
+            if DateTime.parse(undisplayed_posts.first.date_created) < oldest_post_date
+              oldest_post_date = DateTime.parse(undisplayed_posts.first.date_created) 
+            end
+            if  DateTime.parse(undisplayed_posts.first.date_created) > newest_post_date
+              newest_post_date = DateTime.parse(undisplayed_posts.first.date_created)
+            end
+            undisplayed_posts.delete(undisplayed_posts.first)
           end
-          if  DateTime.parse(undisplayed_posts.first.date_created) > newest_post_date
-            newest_post_date = DateTime.parse(undisplayed_posts.first.date_created)
-          end
-          undisplayed_posts.delete(undisplayed_posts.first)
         end
       end
-           
-      page.update_attributes(:oldest_post_date => oldest_post_date, :newest_post_date => newest_post_date, :active => "true")
+      
+      if page.posts.any?
+        page.update_attributes(:oldest_post_date => oldest_post_date, :newest_post_date => newest_post_date, :active => "true")
+      else 
+        page.update_attributes(:oldest_post_date => oldest_post_date, :newest_post_date => newest_post_date, :active => "hidden")
+      end
       page = initialize_page
     end
+    
   end
-      
+
+  def self.rebuild(page)
+    posts = page.posts
+
+    page.rows.each {|row| row.delete}
+    
+    rebuild = true
+    posts_length = posts.length
+    
+    if posts_length < 2 then posts_length = 2 end
+    
+    page_rows = get_rows(page, rebuild,  posts_length)
+
+    page_rows[:rows].each do |row|
+      created_row = page.rows.create(:height => row[:row_height])
+      row[:columns].each do |column|
+        created_column = created_row.columns.create(:width => column[:column_width], :orientation => column[:orientation])
+      end
+    end
+    i = 0
+    page.rows.each do |row|
+      row.columns.each do |column|
+        if posts[i].present?
+          posts[i].update_attributes(:column_id => column.id)
+          i = i + 1;
+        end
+      end
+    end
+  end
+
   protected
   
-  def self.get_rows(page)
-      
+  def self.get_rows(page, rebuild = false, posts_length = false)
+    
+    
     # get one of the orientations footer, sidebar or none and set the appropiate article section metrics
     case page.page_type
     when 'sidebar'
@@ -142,7 +176,13 @@ class Page < ActiveRecord::Base
       
     end
     
-    if i > page.max_articles
+    if rebuild 
+      if i == posts_length
+        {:rows => rows, :orientation => page.page_type}
+      else
+        get_rows(page, true, posts_length)
+      end
+    elsif i > page.max_articles
       get_rows(page)
     else
       {:rows => rows, :orientation => page.page_type}

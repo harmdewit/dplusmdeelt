@@ -1,7 +1,7 @@
 !!!
 %html
 	%head
-		%title Portal	
+		%title Dplusm Deelt Beheer	
 		= stylesheet_link_tag 'admin/reset.css'
 		= stylesheet_link_tag 'admin/main.css'
 		= stylesheet_link_tag 'admin/css3.css'
@@ -26,7 +26,6 @@
 						Login
 							
 				#content
-					capistrano werkt!
 					= devise_error_messages!
 			  
 					- if notice
@@ -36,10 +35,8 @@
 				
 					#login
 						.content-box
-							= devise_error_messages!
 							.content-box-header	
 								%h3 Login
 							.content-box-content
-								= devise_error_messages!
 								=yield
 								.clear

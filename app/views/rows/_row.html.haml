@@ -1,4 +1,5 @@
 %div{:class => "height_#{row.height}"}
 	= render row.columns
 	- unless row == row.page.rows.last
-		.horizontal_divider
+		- if row.page.rows[row.page.rows.index(row) + 1].columns.first.post.present?
+			.horizontal_divider

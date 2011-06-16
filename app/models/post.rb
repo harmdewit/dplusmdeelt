@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :column, :dependent => :destroy
   belongs_to :linked_account
   belongs_to :facebook_page, :foreign_key => :linked_account_id
+  belongs_to :page, :dependent => :destroy
   has_one :article, :dependent => :destroy
   has_one :status, :dependent => :destroy
   has_one :image, :dependent => :destroy
@@ -29,7 +30,7 @@ class Post < ActiveRecord::Base
 
       end
     end
-    undisplayed_posts = Post.find_all_by_column_id(nil, :order => 'date_created ASC')
+    undisplayed_posts = Post.find_all_by_state(nil, :order => 'date_created ASC')
     Page.create_page(undisplayed_posts)
   end
   
@@ -72,18 +73,26 @@ class Post < ActiveRecord::Base
   end
   
   def self.facebook_posts(la)
-    # grab the facebook page feed
-    url = URI.parse("//graph.facebook.com/#{la.uid}/feed")
-    req = Net::HTTP::Get.new(url.path)
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
-    # Turn json into an hash   
-    j = ActiveSupport::JSON 
-    facebook_hash = j.decode(res.body)
+    uri = URI.parse(URI.encode("https://graph.facebook.com/#{la.uid}/feed?access_token=#{la.linked_account.token}"))
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    response_hash = ActiveSupport::JSON.decode(response.body)
+    
+    # # grab the facebook page feed
+    # url = URI.parse("//graph.facebook.com/#{la.uid}/feed")
+    # req = Net::HTTP::Get.new(url.path)
+    # res = Net::HTTP.start(url.host, url.port) {|http|
+    #   http.request(req)
+    # }
+    # # Turn json into an hash   
+    # j = ActiveSupport::JSON 
+    # facebook_hash = j.decode(res.body)
     # enhance the facebook feed to a readable object
     mash = Hashie::Mash.new
-    mash.facebook = facebook_hash
+    mash.facebook = response_hash
     
     mash.facebook.data.each do |p|
       post = la.linked_account.posts.build
@@ -210,7 +219,7 @@ class Post < ActiveRecord::Base
           Image.create do |item| 
             item.post_id = post.id
             item.thumbnail = p['photo_url_75']
-            item.data = p['photo_url_400']
+            item.data = p['photo_url_1280']
             item.description = p['photo_caption']
             open(item.data, "rb") do |fh|
               item.width = ImageSize.new(fh.read).get_width

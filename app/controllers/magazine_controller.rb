@@ -3,7 +3,7 @@ class MagazineController < ApplicationController
   @@POSSIBLE_MIN_WIDTHS = [4, 3]
   @@POSSIBLE_MIN_HEIGHTS = [1]
   @@MAX_ROW_HEIGHT = 3
-  @@ORIENTATIONS = ['none', 'none','sidebar', 'sidebar', 'footer']#, 'footer', 'none', 'none', 'none']
+  @@ORIENTATIONS = ['none', 'none','sidebar', 'sidebar', 'footer', 'footer']#, 'footer', 'none', 'none', 'none']
   @@MAX_ARTICLES = 4
     
   def index
@@ -14,10 +14,18 @@ class MagazineController < ApplicationController
       year = newest_page_date.year
       month = newest_page_date.month
       
-      @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active = 'true'", {\
-        :start_date => Time.local(year, month, 1).beginning_of_month, 
-        :end_date => Time.local(year, month, 1).end_of_month
-      }).order('oldest_post_date ASC')
+      unless admin_signed_in?
+        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active = 'true'", {\
+          :start_date => Time.local(year, month, 1).beginning_of_month, 
+          :end_date => Time.local(year, month, 1).end_of_month
+        }).order('oldest_post_date ASC')
+      else
+        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active IN (:active_values)", {
+          :start_date => Time.local(year, month, 1).beginning_of_month, 
+          :end_date => Time.local(year, month, 1).end_of_month, 
+          :active_values => ['true', 'hidden']
+        }).order('oldest_post_date ASC')
+      end
       @posts = Post.find_all_by_post_type('article')
       @statuses = Post.find_all_by_post_type('status', :order => 'date_created ASC')
 
@@ -30,11 +38,19 @@ class MagazineController < ApplicationController
   def archive
     year = params[:year]
     month = params[:month]
+    
+    unless admin_signed_in?
     @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active = 'true'", {\
       :start_date => Time.local(year, month, 1).beginning_of_month, 
       :end_date => Time.local(year, month, 1).end_of_month
     }).order('oldest_post_date ASC')
-    
+    else
+      @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active IN (:active_values)", {
+        :start_date => Time.local(year, month, 1).beginning_of_month, 
+        :end_date => Time.local(year, month, 1).end_of_month, 
+        :active_values => ['true', 'hidden']
+      }).order('oldest_post_date ASC')
+    end
     unless @pages.nil?    
       get_active_dates(year.to_i, month.to_i)
       @posts = Post.find_all_by_post_type('article') 
@@ -53,12 +69,20 @@ class MagazineController < ApplicationController
     unless tumblr_post.nil?
       year = tumblr_post.date_created.to_time.localtime.year
       month = tumblr_post.date_created.to_time.localtime.month
-
-      @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active = 'true'", {\
-        :start_date => Time.local(year, month, 1).beginning_of_month, 
-        :end_date => Time.local(year, month, 1).end_of_month
-      }).order('oldest_post_date ASC')
-    
+      
+      unless admin_signed_in?
+        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active IN :active", {\
+          :start_date => Time.local(year, month, 1).beginning_of_month, 
+          :end_date => Time.local(year, month, 1).end_of_month,
+          :active => ['true', 'hidden']
+        }).order('oldest_post_date ASC')
+      else
+        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active IN (:active_values)", {
+          :start_date => Time.local(year, month, 1).beginning_of_month, 
+          :end_date => Time.local(year, month, 1).end_of_month, 
+          :active_values => ['true', 'hidden']
+        }).order('oldest_post_date ASC')
+      end
       get_active_dates(year.to_i, month.to_i)
       @posts = Post.find_all_by_post_type('article') 
       @statuses = Post.find_all_by_post_type('status', :order => 'date_created ASC')
@@ -66,7 +90,7 @@ class MagazineController < ApplicationController
       found_page = tumblr_post.column.row.page
       @pages.each_index do |i|
         if found_page == @pages[i]
-          @found_page = i + 1
+          @found_page = i
         end
       end
       render 'index'
@@ -76,8 +100,8 @@ class MagazineController < ApplicationController
   end
   
   def get_active_dates(searched_year, searched_month)
-    start_date = Page.find_all_by_active('true', :order => 'oldest_post_date ASC').first.oldest_post_date.to_time.localtime
-    end_date = Page.find_all_by_active('true', :order => 'oldest_post_date DESC').first.oldest_post_date.to_time.localtime
+    start_date = Page.find_all_by_active(['true', 'hidden'], :order => 'oldest_post_date ASC').first.oldest_post_date.to_time.localtime
+    end_date = Page.find_all_by_active(['true', 'hidden'], :order => 'newest_post_date DESC').first.newest_post_date.to_time.localtime
 
     @years = []
     @next_date
@@ -137,6 +161,23 @@ class MagazineController < ApplicationController
 
     end
     @years.reverse!
+  end
+  
+  def hide_page
+    page = Page.find(params[:id])
+    if page.active == 'true'
+      page.update_attributes(:active => 'hidden')
+    else
+      page.update_attributes(:active => 'true')      
+    end
+    
+    redirect_to request.env["HTTP_REFERER"] + "#page_#{params[:page_hash].to_i}"
+  end
+  
+  def rebuild_page
+    page = Page.find(params[:id])
+    Page.rebuild(page)
+    redirect_to request.env["HTTP_REFERER"] + "#page_#{params[:page_hash].to_i}"
   end
   
   def frontpage

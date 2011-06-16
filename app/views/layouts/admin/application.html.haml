@@ -1,7 +1,7 @@
 !!!
 %html
 	%head
-		%title Portal	
+		%title DplusM Deelt Beheer	
 		= stylesheet_link_tag 'admin/reset.css'
 		= stylesheet_link_tag 'admin/main.css'
 		= stylesheet_link_tag 'admin/css3.css'
@@ -27,12 +27,8 @@
 					%h1#logo Admin Control Panel
 					
 					#header_buttons
-						- if admin_signed_in?
-							= link_to "Logged in as #{current_admin.email}", '#'
-							= link_to "sign out", destroy_admin_session_path
-						- else
-							= link_to "Register", new_admin_registration_path
-							= link_to "Sign in", new_admin_session_path
+						= link_to "Logged in as #{current_admin.email}", '#'
+						= link_to "sign out", destroy_admin_session_path
 						= link_to "DplusM Social Feed", root_path
 							
 					%ul#main-nav
@@ -41,10 +37,15 @@
 						/ - else params[:controller] == "admin/application"
 						/ 	%li= link_to "Home", admin_root_path
 
-						/ - if params[:controller] == "admin/linked_accounts"
-						%li= link_to "Linked Accounts", admin_linked_accounts_path, {:class => "current"}
-						/ - else 
-						/ 	%li= link_to "Linked Accounts", admin_linked_accounts_path
+						- if params[:controller] == "admin/pages"
+							%li= link_to "Pages", admin_pages_path, {:class => "current"}
+						- else 
+							%li= link_to "Pages", admin_pages_path
+						- if params[:controller] == "admin/linked_accounts"
+							%li= link_to "Linked Accounts", admin_linked_accounts_path, {:class => "current"}
+						- else
+							%li= link_to "Linked Accounts", admin_linked_accounts_path
+
 				#content
 					- if notice
 						.notification.success= notice

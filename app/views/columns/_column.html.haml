@@ -1,34 +1,35 @@
 .post_container{:class => "grid_#{column.width}"}
-	= link_to article_url(column.post.article), :remote => true do
-		.post
-			- if column.post.article.image_data.presence
-				- unless	(column.width * (column.row.height * 4)) <= 16 
-					- if column.width >= (column.row.height * 4) 
-						- if column == column.row.columns.first
-							= image_tag(column.post.article.image_data, :class => 'landscape right')
-							- image_location = 'right'
-						- else 
-							= image_tag(column.post.article.image_data, :class => 'landscape left')
-							- image_location = 'left'
-					- else
-						= image_tag(column.post.article.image_data, :class => 'portrait')
-			%h2= column.post.article.title
-			!= column.post.article.body
+	- if column.post.present?
+		= link_to article_url(column.post.article), :remote => true do
+			.post
+				- if column.post.article.image_data.presence
+					- unless	(column.width * (column.row.height * 4)) <= 16 
+						- if column.width >= (column.row.height * 2.5) 
+							- if column == column.row.columns.first
+								= image_tag(column.post.article.image_data, :class => 'landscape right')
+								- image_location = 'right'
+							- else 
+								= image_tag(column.post.article.image_data, :class => 'landscape left')
+								- image_location = 'left'
+						- else
+							= image_tag(column.post.article.image_data, :class => 'portrait')
+				%h2= column.post.article.title
+				!= column.post.article.body
 
 
-			.post_footer_container
-				.metadata_container
-					= link_to(column.post.link_to_post, :class => 'metadata') do
-						- date = Time.parse(column.post.date_created).strftime("%d/%m at %H:%M")
-						= "Geplaatst op #{date}"
-						- case column.post.service
-						- when 'facebook'
-							- service_image = image_tag('social_media_logos/facebook_32.png')
-						-	when 'twitter'
-							- service_image = image_tag('social_media_logos/twitter_32.png')
-						- when 'tumblr'
-							- service_image = image_tag('social_media_logos/tumblr_32.png')
-						!= "#{service_image} "
+				.post_footer_container
+					.metadata_container
+						= link_to(column.post.link_to_post, :class => 'metadata') do
+							- date = Time.parse(column.post.date_created).strftime("%d/%m at %H:%M")
+							= "Geplaatst op #{date}"
+							- case column.post.service
+							- when 'facebook'
+								- service_image = image_tag('social_media_logos/facebook_32.png')
+							-	when 'twitter'
+								- service_image = image_tag('social_media_logos/twitter_32.png')
+							- when 'tumblr'
+								- service_image = image_tag('social_media_logos/tumblr_32.png')
+							!= "#{service_image} "
 
-	- unless (column == column.row.columns.last)
-		.vertical_divider
+		/ - unless (column == column.row.columns.last)
+	.vertical_divider

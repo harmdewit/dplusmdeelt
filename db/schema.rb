@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(:version => 20110502071210) do
   create_table "articles", :force => true do |t|
     t.integer  "post_id"
     t.string   "title"
-    t.string   "original_body"
-    t.string   "body"
+    t.string   "original_body", :limit => 16777216
+    t.string   "body",          :limit => 16777216
     t.string   "image_data"
     t.integer  "image_width"
     t.integer  "image_height"
@@ -122,11 +122,13 @@ ActiveRecord::Schema.define(:version => 20110502071210) do
   create_table "posts", :force => true do |t|
     t.integer  "linked_account_id"
     t.integer  "column_id"
+    t.integer  "page_id"
     t.string   "service"
     t.string   "service_post_id"
     t.string   "post_type"
     t.string   "date_created"
     t.string   "link_to_post"
+    t.string   "state"
     t.integer  "priority"
     t.datetime "created_at"
     t.datetime "updated_at"

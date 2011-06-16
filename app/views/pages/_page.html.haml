@@ -1,4 +1,10 @@
-.page.container_12
+- if page.active == 'hidden'
+	- page_class = 'hidden'
+.page.container_12{:class => page_class}
+	- if admin_signed_in?
+		.admin_buttons
+			= button_to 'Show / Hide', hide_page_url(:id => page.id, :page_hash => @pages.index(page)), :method => :post
+			= button_to 'Rebuild Page', rebuild_page_url(:id => page.id, :page_hash => @pages.index(page)), :method => :post
 	- i = 0
 	= render page.rows
 	- case page.page_type

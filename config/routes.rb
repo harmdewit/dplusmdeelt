@@ -6,6 +6,7 @@ Dplusm::Application.routes.draw do
   match '/auth/:provider/callback' => 'admin/linked_accounts#create'
   
   namespace :admin do
+    resources :pages
     resources :linked_accounts do
       collection do
         post 'synchronize', :as => :synchronize
@@ -16,13 +17,18 @@ Dplusm::Application.routes.draw do
   end
 
   resources :magazine, :only => :index
-  match 'magazine/:year/:month' => 'magazine#archive', :as => :magazine
-  match 'magazine/post/tumblr/:id' => 'magazine#tumblr_post', :as => :tumblr_post
+  get 'magazine/:year/:month' => 'magazine#archive', :as => :magazine
+  get 'magazine/post/tumblr/:id' => 'magazine#tumblr_post', :as => :tumblr_post
+  get 'magazin/page/:id' => 'magazine#page', :as => :magazine_page
   get "magazine/frontpage"
   get "magazine/images"
   get "magazine/images_alternative"
   
-    resources :articles, :only => :show
+  post 'magazine/hide_page/:id/:page_hash'     => 'magazine#hide_page',    :as => :hide_page
+  post 'magazine/rebuild_page/:id/:page_hash'  => 'magazine#rebuild_page', :as => :rebuild_page
+  
+  resources :articles, :only => :show
+  resources :pages
 
   get "test/index"
 
