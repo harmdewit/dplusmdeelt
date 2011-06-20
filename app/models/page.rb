@@ -9,7 +9,7 @@ class Page < ActiveRecord::Base
   @@POSSIBLE_MIN_HEIGHTS = [1]
   @@MAX_ROW_HEIGHT = 3
   @@ORIENTATIONS = ['none', 'none','none', 'footer', 'sidebar']
-  @@MAX_ARTICLES = 4
+  @@MAX_ARTICLES = 6
   
 
   def self.initialize_page

@@ -37,10 +37,6 @@
 						/ - else params[:controller] == "admin/application"
 						/ 	%li= link_to "Home", admin_root_path
 
-						- if params[:controller] == "admin/pages"
-							%li= link_to "Pages", admin_pages_path, {:class => "current"}
-						- else 
-							%li= link_to "Pages", admin_pages_path
 						- if params[:controller] == "admin/linked_accounts"
 							%li= link_to "Linked Accounts", admin_linked_accounts_path, {:class => "current"}
 						- else
