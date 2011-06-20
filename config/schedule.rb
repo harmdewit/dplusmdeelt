@@ -20,7 +20,9 @@
 # Learn more: http://github.com/javan/whenever
 
 every 5.minutes do
-  set :environment, :development
+  if environment == 'development'
+    set :environment, :development
+  end
   runner 'Post.synchronize'
 end
 
