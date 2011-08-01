@@ -14,13 +14,13 @@
 						- else
 							= image_tag(column.post.article.image_data, :class => 'portrait')
 				%h2= column.post.article.title
-				!= column.post.article.body
+				.entry!= column.post.article.body
 
 
 				.post_footer_container
 					.metadata_container
 						= link_to(column.post.link_to_post, :class => 'metadata') do
-							- date = Time.parse(column.post.date_created).strftime("%d/%m at %H:%M")
+							- date = Time.parse(column.post.date_created).strftime("%d/%m om %H:%M")
 							= "Geplaatst op #{date}"
 							- case column.post.service
 							- when 'facebook'
@@ -31,5 +31,7 @@
 								- service_image = image_tag('social_media_logos/tumblr_32.png')
 							!= "#{service_image} "
 
-		/ - unless (column == column.row.columns.last)
-	.vertical_divider
+	- unless (column == column.row.columns.last)
+		- if column.row.columns[column.row.columns.index(column) + 1].post.present?
+	
+			.vertical_divider

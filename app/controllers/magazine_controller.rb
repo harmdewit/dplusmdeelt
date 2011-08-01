@@ -27,7 +27,8 @@ class MagazineController < ApplicationController
         }).order('oldest_post_date ASC')
       end
       @posts = Post.find_all_by_post_type('article')
-      @statuses = Post.find_all_by_post_type('status', :order => 'date_created ASC')
+      @statuses = Post.find_all_by_post_type('status', :order => 'date_created DESC')
+      @statuses_iterator = 0;
 
       get_active_dates(newest_page_date.year, newest_page_date.month)
     else
@@ -54,8 +55,8 @@ class MagazineController < ApplicationController
     unless @pages.nil?    
       get_active_dates(year.to_i, month.to_i)
       @posts = Post.find_all_by_post_type('article') 
-      @statuses = Post.find_all_by_post_type('status', :order => 'date_created ASC')
-
+      @statuses = Post.find_all_by_post_type('status', :order => 'date_created DESC')
+      @statuses_iterator = 0;
       render 'index'
     else
       render 'error'
@@ -85,7 +86,8 @@ class MagazineController < ApplicationController
       end
       get_active_dates(year.to_i, month.to_i)
       @posts = Post.find_all_by_post_type('article') 
-      @statuses = Post.find_all_by_post_type('status', :order => 'date_created ASC')
+      @statuses = Post.find_all_by_post_type('status', :order => 'date_created DESC')
+      @statuses_iterator = 0;
       
       found_page = tumblr_post.column.row.page
       @pages.each_index do |i|

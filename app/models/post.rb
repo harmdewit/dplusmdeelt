@@ -81,16 +81,7 @@ class Post < ActiveRecord::Base
     response = http.request(request)
     response_hash = ActiveSupport::JSON.decode(response.body)
     
-    # # grab the facebook page feed
-    # url = URI.parse("//graph.facebook.com/#{la.uid}/feed")
-    # req = Net::HTTP::Get.new(url.path)
-    # res = Net::HTTP.start(url.host, url.port) {|http|
-    #   http.request(req)
-    # }
-    # # Turn json into an hash   
-    # j = ActiveSupport::JSON 
-    # facebook_hash = j.decode(res.body)
-    # enhance the facebook feed to a readable object
+
     mash = Hashie::Mash.new
     mash.facebook = response_hash
     

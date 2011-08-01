@@ -4,7 +4,7 @@ set :user,        "dplusmdeelt"
 set :use_sudo,    false
 set :deploy_to,   "~/rails"
 set :rake,        "/opt/ruby/bin/rake"
-set :keep_releases,3
+set :keep_releases,6
 
 set :scm,         :git
 set :repository,  "git@github.com:harmdewit/dplusmdeelt.git" 
@@ -21,12 +21,21 @@ namespace :deploy do
   end
 
   after "deploy:update_code", :link_production_db
+  after "deploy:update_code", :share_images
   after 'deploy:update_code', 'bundler:bundle_new_release'
+
 end
 
 desc "Link database.yml to production"
 task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+end
+
+desc "Share the images between versions"
+task :share_images do
+  # remove the folder present for development
+  # run "rmdir #{current_release}/public/images" 
+  run "ln -s #{deploy_to}/#{shared_dir}/public/images #{current_release}/public/images"
 end
 
 namespace :bundler do
@@ -39,8 +48,8 @@ namespace :bundler do
  
   task :bundle_new_release, :roles => :app do
     bundler.create_symlink
-    # run "cd #{release_path}"
-    # run "bundle install --deployment"
+    run "cd #{release_path}"
+    # run "bundle install --deployment --without development"
   end
 end
 

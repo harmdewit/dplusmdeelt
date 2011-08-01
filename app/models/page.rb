@@ -8,8 +8,8 @@ class Page < ActiveRecord::Base
   @@POSSIBLE_MIN_WIDTHS = [4, 3]
   @@POSSIBLE_MIN_HEIGHTS = [1]
   @@MAX_ROW_HEIGHT = 3
-  @@ORIENTATIONS = ['none', 'none','none', 'footer', 'sidebar']
-  @@MAX_ARTICLES = 6
+  @@ORIENTATIONS = ['none', 'none','none', 'footer', 'footer', 'sidebar', 'sidebar']
+  @@MAX_ARTICLES = 1
   
 
   def self.initialize_page
@@ -21,13 +21,13 @@ class Page < ActiveRecord::Base
         case @@ORIENTATIONS[rand(5)]
         when 'sidebar'
           p.page_type = 'sidebar'
-          p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
+          p.max_articles = rand(@@MAX_ARTICLES) + 2
         when 'footer'
           p.page_type = 'footer'
-          p.max_articles = rand(@@MAX_ARTICLES - 1) + 2
+          p.max_articles = rand(@@MAX_ARTICLES) + 2
         when 'none'
           p.page_type = 'none'
-          p.max_articles = rand(@@MAX_ARTICLES - 2) + 2
+          p.max_articles = rand(@@MAX_ARTICLES + 2) + 2
         end
       end
       
@@ -182,73 +182,11 @@ class Page < ActiveRecord::Base
       else
         get_rows(page, true, posts_length)
       end
-    elsif i > page.max_articles
+    elsif i != page.max_articles
       get_rows(page)
     else
       {:rows => rows, :orientation => page.page_type}
     end
   end
-  
-  # def make_album_rows
-  #   page_orientation = 'none'
-  # 
-  #   max_width = @@MAX_COLUMN_WIDTH
-  #   min_height = @@POSSIBLE_MIN_HEIGHTS[0]
-  #   max_height = @@MAX_ROW_HEIGHT + 1
-  #   max_articles = 6# rand(@@MAX_ARTICLES) + 2
-  # 
-  # 
-  #   
-  #   
-  #   until articles.count < max_articles
-  #     rows = []
-  # 
-  #     height_sum = 0
-  #     articles_count = 0
-  #     
-  #     until (height_sum >= max_height) # || (i == max_articles)
-  #       unless articles_count >= (max_articles - 1)
-  #         row_height = rand((max_height - height_sum) / min_height)*min_height + min_height
-  #         if row_height >= max_height - 1 then row_height = max_height - 2 end
-  #       else 
-  #         row_height = max_height - height_sum
-  #       end
-  #       height_sum += row_height
-  #     
-  #       min_width =  @@POSSIBLE_MIN_WIDTHS[rand(2)]
-  #       width_sum = 0
-  #       columns = []
-  #       until (width_sum == max_width)
-  #         unless i >= (max_articles - 1)
-  #           column_width = rand((max_width- width_sum) /min_width)*min_width + min_width
-  #           if column_width >= max_width - min_width then column_width = max_width - 2 * min_width end
-  #         else
-  #           column_width = max_width - width_sum
-  #         end
-  #         width_sum += column_width
-  #       
-  #         if column_width >= (row_height * 3)
-  #           orientation = 'horizontal'
-  #         else
-  #           orientation = 'vertical'
-  #         end
-  # 
-  #         columns.push(:column_width => column_width, :orientation => orientation)
-  #       
-  #         articles_count += 1
-  #       end
-  #       push = rand(2)
-  #       if push 
-  #         rows.push({:row_height => row_height, :columns => columns})
-  #       else
-  #         rows.shift({:row_height => row_height, :columns => columns})
-  #       end
-  #     
-  #     end
-  #   
-  # 
-  #     {:rows => rows, :orientation => page_orientation}
-  #   end
-  # end
   
 end

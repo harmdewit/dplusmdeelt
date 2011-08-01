@@ -1,0 +1,729 @@
+/* 960 Grid System ~ Core CSS.
+ * Learn more ~ http://960.gs/
+ * *
+ * Licensed under GPL and MIT. */
+
+@import "compass/reset";
+@import "960/grid";
+@import "vertical_grid";
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/border-radius";
+
+$ninesixty-gutter-width: 20px;
+// The following generates the default grids provided by the css version of 960.gs
+.container_12 {
+  @include grid-system(12); }
+
+.container_16 {
+  @include grid-system(16); }
+
+// But most compass users prefer to construct semantic layouts like so (two column layout with header and footer):
+
+$nav: #000;
+$black: #000;
+$blue: #6990cb;
+$white: #fff;
+$gray: #808080;
+$light_blue: #c8d6ec;
+$darker_blue: #1b293e;
+$text_color: #404040;
+
+#header {
+	@include grid-container;
+	position: relative;
+	height: 140px;
+	padding: 10px;
+	margin-top: 20px ;
+	margin-bottom: 20px;
+	img { 
+		max-height: 140px;
+	}
+	
+	#brandbox{
+		@include grid(7);
+		@include omega;
+		float: right;
+		right: 50px;
+		height: 120px;
+		padding: 10px 10px;
+		background-color: $blue;
+		h1 {
+			text-align: right;
+			color: white;
+			line-height: 50px;
+		}
+		p {
+//			text-align: right;
+			padding: 0 10px;
+			color: #D7E5FA;
+			font-size: 14px;
+			font-family: sans-serif;
+			line-height: 18px;
+		}
+	}
+	
+	#share {
+		width:47px;
+    height:70px;
+    margin-top:10px;   
+    position:absolute;
+    top: 0;
+    right:0px;
+    cursor:pointer;
+    background:url('../images/share.png') right center no-repeat;
+
+		#share_links {
+			display: none;
+			position: absolute;
+			right: 100%;
+			width: 253px;
+			height: 70px;
+
+			background-color: black;
+			a {
+				text-decoration: none;
+			}
+		}
+		
+		&:hover {
+			background-color: black;
+	    background:url('../images/share_hover.jpg') right no-repeat;
+			#share_links {
+				display: block;
+			}
+		}
+	}
+
+}
+
+
+.container_12,
+.container_16 {
+	margin-bottom:0px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+}
+
+/*	Navigation	*/
+
+#nav {
+	position: relative;
+	margin: 0 auto;
+	height: 50px;
+	width: 960px;	
+
+	.year a, .month {
+		position: relative;
+		float: right;
+		width: 59px;
+		padding-left: 16px;
+		height: 47px;
+		line-height: 47px;
+		text-align: center;
+		background-color: $nav;
+		text-decoration: none;	
+		color: white;
+		
+		p {
+			z-index: 2;
+		}	
+		img.nav_arrow_left {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 47px;
+			}
+		img.nav_arrow_right {
+			position: absolute;
+			left: 100%;
+			top: 0;
+			height: 47px;
+			}
+	}
+
+	a{ 
+		background-color: $nav;
+	}	
+	.nav_false {
+		background-color: gray;
+	}
+	.current a{
+		color: $blue;
+	}
+	a:hover {
+		color: $blue;}
+	
+	#years>li>a {
+		z-index: 1;
+		width: 44px;
+		float: left;
+		background-color: $blue;
+					
+		img {
+			position: absolute;
+			height: 47px;
+			left: 100%;}
+	}
+}
+
+
+.magazine_navigation {
+	z-index: 1;
+}
+
+.magazine_navigation * {
+	float: left;
+	display: inline;
+	margin: 0 10px;
+}
+
+#page_nav {
+	text-align: center;
+	margin: 0 0 15px;
+	
+	li {
+		display: inline;
+		margin: 5px;}
+	
+	li a{
+		padding: 4px 8px;
+		background-color: $blue;
+		text-decoration: none;
+		color: $white;
+	}
+		
+	li:hover a{
+		text-decoration: underline;
+	}
+}
+
+
+#arrows {
+	position: absolute;
+	top: 40%;
+	width: 100%;
+	height: 0;
+	z-index: 9;
+
+	#arrows_positioner {
+		position: relative;
+		max-width: 1200px;
+		min-width: 960px;
+		margin: 0 auto;
+			
+		&>div {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			cursor: pointer;
+		}
+			
+		#previous_date, #next_date{
+			line-height: 100px;
+			text-align: center;
+			color: white;
+			background-color: $gray;
+			
+			&:hover {
+				background-color: $blue;
+			}
+			a {
+				text-decoration: none;
+				color: white;
+			}
+			p.year {
+				margin-top: 20px;
+				line-height: 20px;
+				color: white;
+				font-size: 20px;
+			}
+			p.month {
+				line-height: 40px;
+				font-size: 30px;
+			}
+		}
+		#previous_arrow, #previous_date{
+			left: 0;
+		}
+		#next_arrow, #next_date {
+			right: 0;
+		}
+		#previous_arrow{
+			background: url('../images/previous_arrow_gray_v2.png');
+			&:hover{
+				background: url('../images/previous_arrow_blue_v2.png');
+			}
+		}
+		#next_arrow{
+			background: url('../images/next_arrow_gray_v2.png');
+			
+			&:hover{
+				background: url('../images/next_arrow_blue_v2.png');
+			}
+		}
+	}
+}
+
+/* Slider area */
+#slider_area {
+	@include clearfix;
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+	padding: 5px 0 50px;
+	overflow: hidden;
+	background-color: $black;
+}
+
+#slider_container {
+	position: relative;
+	width: 2000%;
+	margin-top: 15px;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+
+}
+
+#slider_container .page, {
+	margin-left: 230px;
+	position: relative;
+	float: left;
+	background: white;
+}
+
+.post_container {
+	position: relative;
+	height: 100%;
+	a {
+		text-decoration: none;
+		color: $black;
+	}
+	
+	.post {
+		position: relative;
+		height: 100%;
+		overflow: hidden;		
+		line-height: 24px;
+
+		.entry {
+			color: $text_color;
+			margin-bottom: 1.5em;
+		}
+		&:hover  h2, &:hover .entry, &:hover .entry a {
+			color: $blue;
+		}
+		&:hover {
+			cursor: pointer;
+		}
+		.metadata_container {
+			text-align: right;
+			position: absolute;
+			width: 100%;
+			right: 0;
+			bottom: 0;
+			padding: 10px 10px 0 0;
+			background: url('../images/post_footer_40px.png') repeat-x;				
+		}
+	}
+}
+
+.metadata {
+	text-decoration: none;
+	font-size: 13px;
+	font-style: italic;
+	color: black;
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+		color: $blue;}
+
+	img {
+		max-height: 18px;
+		vertical-align: bottom;}
+}
+
+
+.horizontal_divider {
+	position: absolute;
+	bottom: -15px;
+	left: 1.5%;
+	width: 97%;
+	height: 1px;
+	background-color: #bbb;
+}
+
+.vertical_divider {
+	position: absolute;
+	height: 97%;
+	width: 1px;
+	top: 1.5%;
+	right: -10px;
+	background-color: #bbb;
+}
+
+.share_buttons { 
+	@include legacy-pie-clearfix;
+	.button{
+		position: relative;
+		float: left;
+		height: 70px;
+		margin-right: 20px;
+	}
+}
+
+.fancybox_article {
+	padding-right: 25px;
+	padding-bottom: 75px;
+	line-height: 24px;
+	width: 640px;
+	
+	
+	h1 {
+		line-height: 40px;
+	}
+		
+	p {
+		color: $text_color;
+		margin-bottom: 1.5em;
+	}
+}
+
+img.portrait {
+	max-width: 100%;
+	max-height: 50%;
+	margin-bottom: 10px;
+}
+
+img.landscape {
+	max-height: 100%;
+	max-width: 50%;
+}
+
+img.left {
+	float: left;
+	margin: 0px 10px 10px 0px
+}
+
+img.right {
+	float: right;
+	margin: 0px 0px 10px 10px;
+}
+
+.image_frame div {
+		overflow: hidden;
+}
+
+.image_frame {
+	margin: 2px 0px;
+}
+
+.image_frame div:first-child {
+/*	margin-left: -2px;
+*/}
+
+.image_frame div:last-child {
+	margin-right: -8px;
+}
+
+.img_1,
+.img_2,
+.img_3,
+.img_4,
+.img_5,
+.img_6,
+.img_7,
+.img_8,
+.img_9,
+.img_10,
+.img_11,
+.img_12 {
+	position:relative;
+	height: 100%;
+	display: inline;
+	float: left;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+.container_12 .img_1 {
+	width: 68px;
+}
+
+.container_12 .img_2 {
+	width: 148px;
+}
+
+.container_12 .img_3 {
+	width: 228px;
+}
+
+.container_12 .img_4 {
+	width: 308px;
+}
+
+.container_12 .img_5 {
+	width: 388px;
+}
+
+.container_12 .img_6 {
+	width: 468px;
+}
+
+.container_12 .img_7 {
+	width: 548px;
+}
+
+.container_12 .img_8 {
+	width: 628px;
+}
+
+.container_12 .img_9 {
+	width: 708px;
+}
+
+.container_12 .img_10 {
+	width: 788px;
+}
+
+.container_12 .img_11 {
+	width: 868px;
+}
+
+.container_12 .img_12 {
+	width: 948px;
+}
+
+.image_frame img {
+	z-index: 1;
+
+}
+
+.image_frame p {
+		position: absolute;
+	z-index: 9;
+	color: red;
+}
+
+.img_height_1 {
+	height: 125px;
+}
+
+.img_height_2 {
+	height: 125px;
+}
+
+.img_height_3 {
+	height: 187.6px;
+}
+
+.img_height_4 {
+	height: 500px;
+}
+
+.img_height_5 {
+	height: 625px;
+}
+
+
+
+.img_portrait img{
+
+	min-height: 100%;
+	max-height: 100%;
+}
+
+.img_landscape img {
+	min-width: 100%;
+	max-width: 100%;
+}
+
+.sidebar {
+	border-left: 1px solid $blue;
+	position:absolute;
+	right: 0px;
+	background: $light_blue;
+	padding: 0;
+	margin: 0;
+	
+	.height_3 {
+		margin: 0 10px;
+		height: 660px;
+	}
+	.status {
+		margin: 10px 0;
+	}
+}
+
+.height_1.footer {
+	height: 220px;
+}
+
+.footer {
+	border-top  : 1px solid $blue;
+
+	background  : $light_blue;
+	margin      : 0;
+	
+	.status {
+		margin-top : 10px;
+	}
+}
+
+
+.status {
+	position: relative;
+	float: right;
+	height: 80px;
+	overflow: hidden;
+	background: url('../images/quote.png') no-repeat;
+	p {
+		padding-left: 25px;
+		max-height: 60px;
+		overflow: hidden;
+	}
+	.status_person {
+		float: right;
+		max-width: 70px;
+		margin: 0 0 10px 10px;}
+	
+	
+	.meta_data {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		text-align: right;
+		img {
+			max-height: 18px;
+			vertical-align: bottom;}
+	}
+
+}
+
+.sidebar a, .footer a{
+	text-decoration: none;
+	color: $text_color;
+	
+	&:hover {
+		color: $blue;
+	}
+}
+
+#footer_container {
+	width: 100%;
+	margin-top: 60px;
+}
+
+#footer {
+	margin: 0 auto;
+	width: 960px;
+	line-height: 24px;
+	text-align: left;
+	font-weight: bold;
+	color: black;
+}
+
+#portrait_footer {
+	display: inline;
+	float: left;
+	width: 140px;
+	margin: 0 10px;
+	padding-bottom: 30px;
+	img {
+		max-height: 140px;
+	}
+}
+    
+#footer a, #footer a:active, #footer a:visited {
+	font-style: none;
+  color: $blue;
+}
+
+#contact ul{
+	float   : left;
+	margin  : 0 10px;
+	list-style: none;
+}
+
+
+/* frontpage */
+.frontpage_title {
+	margin: 10px;
+	position: absolute;
+	color: white;
+	text-shadow: 0 0 4px #000; /* horizontal-offset vertical-offset 'blur' colour */
+	-moz-text-shadow: 0 0 4px #000;
+	-webkit-text-shadow: 0 0 4px #000;
+	z-index: 1;
+}
+
+/* image gallery */
+.image_frame>div>img {
+	opacity: 0.6;
+}
+
+.image_frame img:hover {
+	opacity: 1;
+}
+
+.error {
+	color: white;
+}
+
+/* Typography */
+
+@font-face {
+    font-family: 'PlanerRegular';
+    src: url('../fonts/planer/planer_reg-webfont.eot');
+    src: url('../fonts/planer/planer_reg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/planer/planer_reg-webfont.woff') format('woff'),
+         url('../fonts/planer/planer_reg-webfont.ttf') format('truetype'),
+         url('../fonts/planer/planer_reg-webfont.svg#PlanerRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1 {
+	font-family: 'PlanerRegular';
+	font-size: 40px;
+}
+
+h2 {
+	font-family: 'PlanerRegular';
+	font-size: 34px;
+	line-height: 1em;
+	margin-bottom: 5px;
+}
+
+h3 {
+	margin-left: 10px;
+	font-family: 'PlanerRegular';
+	font-size: 25px;
+	margin-top: 10px;
+	color: $blue;
+
+}
+
+body {
+	font-size: 13px ;
+	font-family: 'calibri', sans-serif;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.hidden {
+	opacity: 0.5;
+}
+
+.admin_buttons {
+	z-index: 1;
+	position: absolute;
+	right: 0px;
+	bottom: 100%;
+}

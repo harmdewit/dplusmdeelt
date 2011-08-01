@@ -18,7 +18,7 @@ Dplusm::Application.routes.draw do
 
   resources :magazine, :only => :index
   get 'magazine/:year/:month' => 'magazine#archive', :as => :magazine
-  get 'magazine/post/tumblr/:id' => 'magazine#tumblr_post', :as => :tumblr_post
+  get 'magazine/posts/tumblr/:id' => 'magazine#tumblr_post', :as => :tumblr_post
   get 'magazin/page/:id' => 'magazine#page', :as => :magazine_page
   get "magazine/frontpage"
   get "magazine/images"

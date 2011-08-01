@@ -5,55 +5,57 @@
 		.admin_buttons
 			= button_to 'Show / Hide', hide_page_url(:id => page.id, :page_hash => @pages.index(page)), :method => :post
 			= button_to 'Rebuild Page', rebuild_page_url(:id => page.id, :page_hash => @pages.index(page)), :method => :post
-	- i = 0
 	= render page.rows
 	- case page.page_type
 	- when 'footer'
 		%div{:class => "height_1 footer"}
+			%h3 Recente Tweets
 			- for status in 1..3 do
 				.grid_4
 					- for i in 1..2 do
-						%a{:href => @statuses[i].link_to_post}
+						- unless @statuses[@statuses_iterator].nil?
+							%a{:href => @statuses[@statuses_iterator].link_to_post}
+								.status
+									%img{:src => @statuses[@statuses_iterator].linked_account.image, :class => 'status_person'}
+									%p= @statuses[@statuses_iterator].status.text
+									.clear
+									%br
+									.meta_data
+										- date = @statuses[@statuses_iterator].date_created.to_time.localtime.strftime("%d/%m om %H:%M")
+										= "Geplaatst op #{date}"
+										- case @statuses[@statuses_iterator].service
+										- when 'facebook'
+											= image_tag('social_media_logos/facebook_32.png')
+										-	when 'twitter'
+											= image_tag('social_media_logos/twitter_32.png')
+										- when 'tumblr'
+											= image_tag('social_media_logos/tumblr_32.png')
+							- @statuses_iterator += 1
+								
+		.clear
+	- when 'sidebar'
+		.sidebar
+			.height_3.grid_4
+				%h3 Recente Tweets
+				- for status in 1..6 do
+					- unless @statuses[@statuses_iterator].nil?
+						%a{:href => @statuses[@statuses_iterator].link_to_post}
 							.status
-								%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}
-								%p= @statuses[i].status.text
+								%img{:src => @statuses[@statuses_iterator].linked_account.image, :class => 'status_person'}	
+								%p= @statuses[@statuses_iterator].status.text
 								.clear
 								%br
 								.meta_data
-									- date = @statuses[i].date_created.to_time.localtime
-									= " #{date.day} #{Date::MONTHNAMES[date.month]}"
-									= "Geplaatst op"
-									- case @statuses[i].service
+									- date = @statuses[@statuses_iterator].date_created.to_time.localtime.strftime("%d/%m om %H:%M")
+									= "Geplaatst op #{date}"
+									- case @statuses[@statuses_iterator].service
 									- when 'facebook'
 										= image_tag('social_media_logos/facebook_32.png')
 									-	when 'twitter'
 										= image_tag('social_media_logos/twitter_32.png')
 									- when 'tumblr'
 										= image_tag('social_media_logos/tumblr_32.png')
-						- i += 1
-								
-		.clear
-	- when 'sidebar'
-		.sidebar
-			.height_3.grid_4
-				- for status in 1..6 do
-					%a{:href => @statuses[i].link_to_post}
-						.status
-							%img{:src => @statuses[i].linked_account.image, :class => 'status_person'}	
-							%p= @statuses[i].status.text
-							.clear
-							%br
-							.meta_data
-								- date = @statuses[i].date_created.to_time.localtime
-								= "Geplaatst op"
-								= " #{date.day} #{Date::MONTHNAMES[date.month]}"
-								- case @statuses[i].service
-								- when 'facebook'
-									= image_tag('social_media_logos/facebook_32.png')
-								-	when 'twitter'
-									= image_tag('social_media_logos/twitter_32.png')
-								- when 'tumblr'
-									= image_tag('social_media_logos/tumblr_32.png')
-						- i += 1
+
+							- @statuses_iterator += 1
 				.clear
 		.clear
