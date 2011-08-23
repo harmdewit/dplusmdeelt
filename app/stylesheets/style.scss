@@ -21,9 +21,9 @@ $ninesixty-gutter-width: 20px;
 
 $nav: #000;
 $black: #000;
-$blue: #6990cb;
+$blue: #577BBF;
 $white: #fff;
-$gray: #808080;
+$gray: #6D6D6D;
 $light_blue: #c8d6ec;
 $darker_blue: #1b293e;
 $text_color: #404040;
@@ -146,7 +146,7 @@ $text_color: #404040;
 		background-color: $nav;
 	}	
 	.nav_false {
-		background-color: gray;
+		background-color: #6D6D6D;
 	}
 	.current a{
 		color: $blue;
@@ -158,7 +158,7 @@ $text_color: #404040;
 		z-index: 1;
 		width: 44px;
 		float: left;
-		background-color: $blue;
+		background-color: #577BBF;
 					
 		img {
 			position: absolute;
@@ -312,11 +312,12 @@ $text_color: #404040;
 			color: $text_color;
 			margin-bottom: 1.5em;
 		}
-		&:hover  h2, &:hover .entry, &:hover .entry a {
-			color: $blue;
+		
+		p {
+			margin-bottom: 1.5em;
 		}
-		&:hover {
-			cursor: pointer;
+		h2:hover, .entry a {
+			color: $blue;
 		}
 		.metadata_container {
 			text-align: right;
@@ -324,7 +325,7 @@ $text_color: #404040;
 			width: 100%;
 			right: 0;
 			bottom: 0;
-			padding: 10px 10px 0 0;
+			padding-top: 10px;
 			background: url('../images/post_footer_40px.png') repeat-x;				
 		}
 	}
@@ -334,9 +335,8 @@ $text_color: #404040;
 	text-decoration: none;
 	font-size: 13px;
 	font-style: italic;
-	color: black;
+	color: gray;
 	opacity: 0.5;
-
 	&:hover {
 		opacity: 1;
 		color: $blue;}
@@ -365,6 +365,16 @@ $text_color: #404040;
 	background-color: #bbb;
 }
 
+a.lees_meer {
+	float: left;
+	font-style: italic;
+	opacity: 0.5;
+	
+	&:hover {
+		color: $blue;
+		opacity: 1;
+	}
+}
 .share_buttons { 
 	@include legacy-pie-clearfix;
 	.button{

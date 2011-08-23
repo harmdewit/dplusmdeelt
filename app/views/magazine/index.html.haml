@@ -14,19 +14,19 @@
 									= link_to	magazine_path(:year => year[:year], :month => month[:month]) do
 										= image_tag('nav_arrow_left.png', :class => 'nav_arrow_left')
 										= image_tag('nav_arrow_right.png', :class => 'nav_arrow_right')
-										%p= Date::MONTHNAMES[month[:month]]
+										%p= Date::ABBR_MONTHNAMES[month[:month]]
 							- else
 								%li.month.active
 									= link_to	magazine_path(:year => year[:year], :month => month[:month]) do
 										= image_tag('nav_arrow_left.png', :class => 'nav_arrow_left')
 										= image_tag('nav_arrow_right.png', :class => 'nav_arrow_right')
-										%p= Date::MONTHNAMES[month[:month]]
+										%p= Date::ABBR_MONTHNAMES[month[:month]]
 
 						- elsif month[:active] == false
 							%li.month.nav_false
 								= image_tag('nav_arrow_false_left.png', :class => 'nav_arrow_left')
 								= image_tag('nav_arrow_false_right.png', :class => 'nav_arrow_right')
-								%p= Date::MONTHNAMES[month[:month]]
+								%p= Date::ABBR_MONTHNAMES[month[:month]]
 
 						
 
@@ -59,25 +59,3 @@
 				
 	#slider_container.clearfix
 		= render @pages
-		
-
-	
-	
-		
-
-			
-
-
-/ #footer
-/ 	%ul#statuses
-/ 		- @statuses.each do |post|
-/ 			%li
-/ 	
-/ 				- if post.service == 'facebook'
-/ 					= image_tag post.linked_account.image
-/ 				- else 
-/ 					= image_tag post.linked_account.image
-/ 				- if @statuses.first == post
-/ 					.status_message 
-/ 						%p= post.status.text
-/ 						= image_tag 'balloon start.png'

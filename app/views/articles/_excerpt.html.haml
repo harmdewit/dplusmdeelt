@@ -1,0 +1,30 @@
+.post
+	- if post.article.image_data.presence
+		- unless	(post.column.width * (post.column.row.height * 4)) <= 16 
+			- if post.column.width >= (post.column.row.height * 2.5) 
+				- if post.column == post.column.row.columns.first
+					= image_tag(post.article.image_data, :class => 'landscape right')
+					- image_location = 'right'
+				- else 
+					= image_tag(post.article.image_data, :class => 'landscape left')
+					- image_location = 'left'
+			- else
+				= image_tag(post.article.image_data, :class => 'portrait')
+	= link_to article_url(post.article), :remote => true do
+		%h2= post.article.title
+	.entry!= post.article.body
+	.post_footer_container
+		.metadata_container
+			= link_to article_url(post.article), :remote => true , :class => "lees_meer" do
+				Lees meer»
+			= link_to(post.link_to_post, :class => 'metadata') do
+				- date = Time.parse(post.date_created).strftime("%d/%m om %H:%M")
+				= "Geplaatst op #{date}"
+				- case post.service
+				- when 'facebook'
+					- service_image = image_tag('social_media_logos/facebook_32.png')
+				-	when 'twitter'
+					- service_image = image_tag('social_media_logos/twitter_32.png')
+				- when 'tumblr'
+					- service_image = image_tag('social_media_logos/tumblr_32.png')
+				!= "#{service_image} "
