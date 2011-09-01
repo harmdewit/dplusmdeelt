@@ -954,7 +954,7 @@ footer, header, hgroup, menu, nav, section {
 }
 /* line 148, ../../app/stylesheets/style.scss */
 #nav .nav_false {
-  background-color: #6D6D6D;
+  background-color: #808080;
 }
 /* line 151, ../../app/stylesheets/style.scss */
 #nav .current a {
@@ -969,7 +969,7 @@ footer, header, hgroup, menu, nav, section {
   z-index: 1;
   width: 44px;
   float: left;
-  background-color: #577BBF;
+  background-color: #6990cb;
 }
 /* line 163, ../../app/stylesheets/style.scss */
 #nav #years > li > a img {
