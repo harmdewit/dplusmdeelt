@@ -1,10 +1,13 @@
+require "bundler/capistrano"
 set :application, "dplusm"
 set :host,        "perry.bluerail.nl"
 set :user,        "dplusmdeelt"
 set :use_sudo,    false
 set :deploy_to,   "~/rails"
 set :rake,        "/opt/ruby/bin/rake"
-set :keep_releases,6
+set :keep_releases, 3
+set :bundle_without,  [:development, :test]
+set :bundle_dir, File.join(fetch(:shared_path), 'vendor_bundle')
 
 set :scm,         :git
 set :repository,  "git@github.com:harmdewit/dplusmdeelt.git" 
@@ -22,8 +25,6 @@ namespace :deploy do
 
   after "deploy:update_code", :link_production_db
   after "deploy:update_code", :share_images
-  after 'deploy:update_code', 'bundler:bundle_new_release'
-
 end
 
 desc "Link database.yml to production"
@@ -33,23 +34,8 @@ end
 
 desc "Share the images between versions"
 task :share_images do
-  # remove the folder present for development
-  # run "rmdir #{current_release}/public/images" 
-  run "ln -s #{deploy_to}/#{shared_dir}/public/images #{current_release}/public/images"
-end
-
-namespace :bundler do
-  task :create_symlink, :roles => :app do
-    shared_dir = File.join(shared_path, 'vendor_bundle')
-    release_dir = File.join(release_path, 'vendor/bundle')
-    run("mkdir -p #{shared_dir}")
-    run("ln -s #{shared_dir} #{release_dir}")
-  end
- 
-  task :bundle_new_release, :roles => :app do
-    bundler.create_symlink
-    run "cd #{release_path}"
-    # run "bundle install --deployment --without development"
-  end
+  run "rmdir #{deploy_to}/shared/images"
+  run "cp -r #{release_path}/public/images #{deploy_to}/shared/images/"
+  run "ln -nfs #{deploy_to}/shared/images #{release_path}/public/images/"
 end
 
