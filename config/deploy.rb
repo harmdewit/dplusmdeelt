@@ -1,3 +1,18 @@
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require 'bundler/capistrano'
+
+# Indien u geen RVM gebruikt op uw system kunt u het onderstaande bestand
+# downloaden op: https://github.com/wayneeseguin/rvm/blob/master/lib/rvm/capistrano.rb
+# Plaats dit in uw applicatie en pas de onderstaande require regel aan.
+require 'rvm/capistrano'
+
+# De te gebruiken RVM versie, default is 1.8.7. Indien u een Thin installatie
+# met Ruby 1.9.2 heeft dan kunt u '1.9.2' als versie opgeven.
+set :rvm_ruby_string, 'default'
+set :rvm_type, :system
+set :rvm_bin_path, '/usr/local/bin'
+
+
 require "bundler/capistrano"
 set :application, "dplusm"
 set :host,        "perry.bluerail.nl"
@@ -8,6 +23,9 @@ set :rake,        "/opt/ruby/bin/rake"
 set :keep_releases, 3
 set :bundle_without,  [:development, :test]
 set :bundle_dir, File.join(fetch(:shared_path), 'vendor_bundle')
+
+# Add RVM's lib directory to the load path.
+
 
 set :scm,         :git
 set :repository,  "git@github.com:harmdewit/dplusmdeelt.git" 
@@ -34,8 +52,7 @@ end
 
 desc "Share the images between versions"
 task :share_images do
-  run "rmdir #{deploy_to}/shared/images"
-  run "cp -r #{release_path}/public/images #{deploy_to}/shared/images/"
-  run "ln -nfs #{deploy_to}/shared/images #{release_path}/public/images/"
+  run "mv -f #{release_path}/public/images #{deploy_to}/shared/"
+  run "ln -nfs #{deploy_to}/shared/images #{release_path}/public/images"
 end
 
