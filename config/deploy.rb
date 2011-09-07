@@ -52,8 +52,9 @@ end
 
 desc "Share the images between versions"
 task :share_images do
-  run "rm -dr #{deploy_to}/shared/images"
+  run "if [ -d #{deploy_to}/shared/images ]; then rm -r #{deploy_to}/shared/images; fi"
   run "mv -u #{release_path}/public/images #{deploy_to}/shared/images" # Using the same source and target directory name gives a "cannot move into subdirectory" conflict.
   run "ln -nfs #{deploy_to}/shared/images #{release_path}/public/images"
+  
 end
 

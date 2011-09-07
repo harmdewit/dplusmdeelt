@@ -48,14 +48,14 @@
 				#previous_date
 					= link_to	magazine_path(:year => @previous_date[:year], :month => @previous_date[:month], :anchor => 'last') do
 						%p.year= @previous_date[:year]
-						%p.month= Date::MONTHNAMES[@previous_date[:month]]
+						%p.month= Date::ABBR_MONTHNAMES[@previous_date[:month]]
 
 			#next_arrow			
 			-if @next_date.presence
 				#next_date
 					= link_to	magazine_path(:year => @next_date[:year], :month => @next_date[:month], :anchor => 'first') do
 						%p.year= @next_date[:year]
-						%p.month= Date::MONTHNAMES[@next_date[:month]]
+						%p.month= Date::ABBR_MONTHNAMES[@next_date[:month]]
 				
 	#slider_container.clearfix
 		= render @pages
