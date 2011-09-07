@@ -52,7 +52,7 @@ end
 
 desc "Share the images between versions"
 task :share_images do
-  run "mv -f #{release_path}/public/images #{deploy_to}/shared/"
+  run "mv -f #{release_path}/public/images/ #{deploy_to}/shared/images/"
   run "ln -nfs #{deploy_to}/shared/images #{release_path}/public/images"
 end
 
