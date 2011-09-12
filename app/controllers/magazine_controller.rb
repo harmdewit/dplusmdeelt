@@ -72,13 +72,13 @@ class MagazineController < ApplicationController
       month = tumblr_post.date_created.to_time.localtime.month
       
       unless admin_signed_in?
-        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active IN :active", {\
+        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active = 'true'", {\
           :start_date => Time.local(year, month, 1).beginning_of_month, 
           :end_date => Time.local(year, month, 1).end_of_month,
           :active => ['true', 'hidden']
         }).order('oldest_post_date ASC')
       else
-        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active IN (:active_values)", {
+        @pages = Page.where("newest_post_date >= :start_date AND oldest_post_date <= :end_date AND active = 'true'", {
           :start_date => Time.local(year, month, 1).beginning_of_month, 
           :end_date => Time.local(year, month, 1).end_of_month, 
           :active_values => ['true', 'hidden']
